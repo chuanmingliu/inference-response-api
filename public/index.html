@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>Responsible · Local model playground</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1.5"/><rect x="14.5" y="3.5" width="6" height="6" rx="1.5"/><rect x="3.5" y="14.5" width="6" height="6" rx="1.5"/><rect x="14.5" y="14.5" width="6" height="6" rx="1.5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6m0-6L10 14M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </svg>
+
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="Responsible home"><span class="brand-mark"><span></span><span></span><span></span></span><span>responsible<span class="brand-dot">.</span></span></a>
+    <div class="workspace-label"><span class="tiny-square"></span> LOCAL WORKSPACE <span class="workspace-key">01</span></div>
+    <nav>
+      <button class="nav-item active" id="nav-playground" aria-current="page"><svg><use href="#i-grid"/></svg>Playground<span class="nav-active-dot"></span></button>
+      <button class="nav-item" id="nav-api"><svg><use href="#i-code"/></svg>API reference</button>
+      <a class="nav-item" href="/docs" data-deployment-doc target="_blank" rel="noopener"><svg><use href="#i-server"/></svg>Deployment<svg class="nav-external"><use href="#i-external"/></svg></a>
+    </nav>
+    <div class="sidebar-note"><div class="mini-orbit" aria-hidden="true"><span></span></div><h2>Small model.<br>Real possibilities.</h2><p>A little room to experiment,<br>right on your Mac.</p><span class="local-label"><span></span> ON-DEVICE INFERENCE</span></div>
+    <div class="sidebar-footer"><span class="machine-icon"><svg><use href="#i-server"/></svg></span><div><strong>This Mac</strong><span>Local development</span></div><span class="footer-dot"></span></div>
+  </aside>
+
+  <main>
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb-page">Playground</strong></div><a class="topbar-docs" href="/docs" data-deployment-doc target="_blank" rel="noopener">Deployment guide <svg><use href="#i-external"/></svg></a></header>
+
+    <section id="playground-view" class="page-view">
+      <div class="page-heading"><div><div class="eyebrow">BUILD SOMETHING LOCAL</div><h1>Model playground<span>.</span></h1><p id="page-subtitle">Three ways to run local. One place to put them to the test.</p></div><button id="refresh-status" class="status-pill" aria-label="Refresh service status"><span class="status-dot pending"></span><span id="status-label">Checking service</span><svg><use href="#i-refresh"/></svg></button></div>
+
+      <div class="overview" aria-label="Service overview">
+        <div class="overview-item"><span class="overview-icon"><svg><use href="#i-spark"/></svg></span><div><span class="metric-label">ACTIVE MODEL</span><strong id="overview-model">Qwen3 0.6B <span class="muted-tag">4-bit</span></strong></div></div>
+        <div class="overview-item"><span class="overview-icon"><svg><use href="#i-server"/></svg></span><div><span class="metric-label">INFERENCE ENGINE</span><strong id="overview-engine">Checking configuration</strong></div></div>
+        <div class="overview-item"><span class="overview-icon"><svg><use href="#i-code"/></svg></span><div><span class="metric-label">API INTERFACE</span><strong>Responses + Chat</strong></div></div>
+      </div>
+
+      <div class="comparison-rail" aria-label="Compare inference services">
+        <button id="docker-comparison" class="comparison-card selected" aria-pressed="true">
+          <span class="comparison-top"><span class="comparison-label">A <span>Docker Model Runner</span></span><strong id="docker-time">—</strong></span>
+          <span id="docker-availability" class="comparison-availability">Checking service</span>
+          <span id="docker-run-detail" class="comparison-detail">Send a prompt to measure</span>
+        </button>
+        <button id="native-comparison" class="comparison-card" aria-pressed="false">
+          <span class="comparison-top"><span class="comparison-label">B <span>Native vLLM Metal</span></span><strong id="native-time">—</strong></span>
+          <span id="native-availability" class="comparison-availability">Checking service</span>
+          <span id="native-run-detail" class="comparison-detail">Send a prompt to measure</span>
+        </button>
+        <button id="sglang-comparison" class="comparison-card" aria-pressed="false">
+          <span class="comparison-top"><span class="comparison-label">C <span>SGLang MLX</span></span><strong id="sglang-time">—</strong></span>
+          <span id="sglang-availability" class="comparison-availability">Checking service</span>
+          <span id="sglang-run-detail" class="comparison-detail">Send a prompt to measure</span>
+        </button>
+      </div>
+      <div class="playground-grid">
+        <section class="chat-card" aria-labelledby="conversation-title">
+          <div class="card-toolbar"><div class="card-title"><span class="section-marker"></span><h2 id="conversation-title">Conversation</h2><span id="message-count" class="count-badge">0</span></div><div class="toolbar-actions"><button id="copy-curl" class="text-button" title="Copy current request as cURL"><svg><use href="#i-code"/></svg><span>Copy cURL</span></button><span class="toolbar-divider"></span><button id="clear-chat" class="icon-button" title="Clear conversation" aria-label="Clear conversation"><svg><use href="#i-trash"/></svg></button></div></div>
+          <div id="service-notice" class="service-notice" role="status" hidden></div>
+          <div class="conversation-scroll" id="conversation-scroll">
+            <div id="empty-state" class="empty-state"><div class="empty-art" aria-hidden="true"><div class="orbit-ring one"></div><div class="orbit-ring two"></div><div class="empty-core"><svg><use href="#i-spark"/></svg></div><span class="orbit-dot"></span></div><div class="empty-eyebrow">A BLANK CANVAS, A LOCAL MODEL</div><h3>What are you curious about?</h3><p>Start with a prompt below, or bring your own idea.</p><div class="starter-grid"><button class="starter" data-prompt="Explain what an API is to a curious beginner. Use one simple, everyday analogy and keep it under 100 words."><span class="starter-category">UNDERSTAND</span><strong>Make the complex simple</strong><span>Explain an API with an everyday analogy.<svg><use href="#i-arrow"/></svg></span></button><button class="starter" data-prompt="Write a small Python function that removes duplicate items from a list while preserving their original order. Include a short example."><span class="starter-category">CREATE</span><strong>A little code, a useful idea</strong><span>Write a clean Python helper function.<svg><use href="#i-arrow"/></svg></span></button><button class="starter" data-prompt="Suggest three memorable names for a tiny neighborhood coffee shop with lots of plants. For each name, give a one-sentence explanation."><span class="starter-category">EXPLORE</span><strong>Give an idea some shape</strong><span>Find a name for a neighborhood café.<svg><use href="#i-arrow"/></svg></span></button><button class="starter" data-prompt="Turn these notes into three concise action items: Launch on Friday. Maya needs to finish the landing page. Test the signup flow by Thursday. Alex will send the announcement email on launch day."><span class="starter-category">ORGANIZE</span><strong>Turn notes into next steps</strong><span>Pull clear actions out of a messy note.<svg><use href="#i-arrow"/></svg></span></button></div></div>
+            <div id="messages" class="messages" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions"></div>
+          </div>
+          <div class="generation-stats" id="generation-stats" hidden><span><span class="stats-dot"></span><span id="generation-state">Complete</span></span><div><span id="latency-stat"></span><span id="tokens-stat"></span></div></div>
+          <div class="response-meta" id="response-meta" hidden><span id="cache-stat">Cache usage not reported</span><div><span class="response-id-label">Response ID</span><code id="response-id"></code><button id="copy-response-id" class="icon-button" type="button" aria-label="Copy response ID" title="Copy response ID"><svg><use href="#i-copy"/></svg></button></div></div>
+          <div class="composer-wrap"><form id="prompt-form" class="composer"><label for="prompt" class="sr-only">Your message</label><textarea id="prompt" rows="2" placeholder="Ask anything. It stays on your machine."></textarea><div class="composer-bottom"><span class="composer-hint"><kbd>⌘</kbd> <kbd>↵</kbd> to send <span>·</span> <span id="composer-mode">Streaming enabled</span></span><button id="send-button" class="send-button" type="submit" aria-label="Send message"><svg><use href="#i-send"/></svg></button><button id="stop-button" class="stop-button" type="button" hidden><span></span> Stop</button></div></form><div class="composer-caption"><span>Local model, real API.</span><span>Small models can make mistakes.</span></div></div>
+        </section>
+
+        <aside class="settings-column" aria-label="Model settings">
+          <section class="settings-card"><div class="settings-heading"><h2>Configuration</h2><span class="settings-dots" aria-hidden="true">•••</span></div><div class="field service-field"><label for="service-select">Inference service</label><div class="select-wrap"><select id="service-select"><option value="docker">A · Docker Model Runner</option><option value="native">B · Native vLLM Metal</option><option value="sglang">C · SGLang MLX</option></select><svg><use href="#i-chevron"/></svg></div><code id="service-url"></code><p class="field-help" id="service-help">Switching service starts a fresh conversation.</p></div><div class="model-selector"><span class="model-avatar">Q</span><div><strong id="config-model-name">Qwen3 0.6B</strong><span id="config-model-detail">4-bit · Local model</span></div><span class="model-local-badge">LOCAL</span></div><div class="field"><label for="api-mode">API endpoint</label><div class="select-wrap"><select id="api-mode"><option value="responses">Responses API · adapter</option><option value="chat">Chat Completions</option></select><svg><use href="#i-chevron"/></svg></div><code id="endpoint-label">POST /v1/responses</code></div><div id="response-options" class="response-options" hidden><label class="check-option" for="store-conversation"><input type="checkbox" id="store-conversation" aria-describedby="conversation-storage-help"><span>Remember conversation</span></label><p id="conversation-storage-help" class="field-help">Send full conversation history with each request. Responses are not stored.</p><label id="background-option" class="check-option" for="background-response"><input type="checkbox" id="background-response" aria-describedby="background-help"><span>Run in background</span></label><p id="background-help" class="field-help">Background jobs store the response and can be cancelled. Regular requests stream as they generate.</p><div class="field prompt-cache-field" id="prompt-cache-field" hidden><label for="prompt-cache-key">Prompt cache key <span>OPTIONAL</span></label><input type="text" id="prompt-cache-key" maxlength="256" placeholder="e.g. project-notes" aria-describedby="prompt-cache-help"><p id="prompt-cache-help" class="field-help">Keep a stable key to reuse matching prompt prefixes across requests.</p></div></div><div class="field instruction-field"><label for="system-instructions">System instructions <span>OPTIONAL</span></label><textarea id="system-instructions" rows="4" placeholder="Set the tone, role, or rules for your model…"></textarea></div><div class="field"><div class="field-row"><label for="temperature">Temperature</label><output id="temperature-output" for="temperature">0.7</output></div><input id="temperature" type="range" min="0" max="2" step="0.1" value="0.7"><div class="range-labels"><span>Precise</span><span>Creative</span></div></div><div class="field"><label for="max-tokens">Max output tokens</label><input id="max-tokens" type="number" min="16" max="4096" step="16" value="512"><p class="field-help" id="context-help">Loading context window…</p></div><div class="settings-footer"><span class="soft-dot"></span> Settings apply to the next message</div></section>
+
+          <section class="inspector-card"><div class="settings-heading"><h2>Under the hood</h2><span class="inspect-badge">JSON</span></div><div class="inspector-tabs" role="tablist" aria-label="Request inspector"><button id="request-tab" class="inspector-tab active" role="tab" aria-selected="true" aria-controls="inspector-code">Request</button><button id="response-tab" class="inspector-tab" role="tab" aria-selected="false" aria-controls="inspector-code">Response</button><button id="copy-inspector" class="icon-button" title="Copy inspector contents" aria-label="Copy inspector contents"><svg><use href="#i-copy"/></svg></button></div><pre id="inspector-code" tabindex="0" role="tabpanel" aria-labelledby="request-tab"></pre><div class="inspector-footer"><span id="inspector-note">Preview of your next request</span><span class="live-label"><span></span> LIVE</span></div></section>
+          <p class="status-footnote" id="status-footnote">Checking local service availability.</p>
+        </aside>
+      </div>
+      <footer class="page-footer"><span>RESPONSIBLE <span class="footer-slash">/</span> LOCAL INFERENCE LAB</span><span>Designed for a smaller footprint.</span></footer>
+    </section>
+
+    <section id="api-view" class="page-view" hidden><div class="page-heading"><div><div class="eyebrow">FROM PLAYGROUND TO PRODUCT</div><h1>One model. Two APIs<span>.</span></h1><p>Use familiar endpoints with your local inference service.</p></div></div><div class="api-intro"><span class="local-label"><span></span> YOUR LOCAL BASE URL</span><code id="api-base-url"></code><p>Requests are forwarded to the model runner. Keep this development service on your Mac.</p></div><div class="api-examples"><section class="api-example"><div class="settings-heading"><div><h2 id="responses-example-title">Responses API · adapter</h2><p id="responses-example-description">Text-only compatibility adapter. Send full history with store: false.</p></div><button class="text-button" id="copy-response-example"><svg><use href="#i-copy"/></svg>Copy</button></div><pre id="responses-example"></pre></section><section class="api-example"><div class="settings-heading"><div><h2>Chat Completions</h2><p>A familiar conversation with role-based messages.</p></div><button class="text-button" id="copy-chat-example"><svg><use href="#i-copy"/></svg>Copy</button></div><pre id="chat-example"></pre></section></div><div class="api-note"><svg><use href="#i-server"/></svg><div><h2>Understand your deployment</h2><p>Find setup steps, service commands, limitations, and verification results in the deployment guide.</p></div><a class="button-link" href="/docs" data-deployment-doc target="_blank" rel="noopener">Read the guide <svg><use href="#i-arrow"/></svg></a></div></section>
+  </main>
+  <div id="toast" class="toast" role="status" hidden><svg><use href="#i-check"/></svg><span></span></div>
+</body>
+</html>

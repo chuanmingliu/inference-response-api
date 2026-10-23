@@ -1,0 +1,1043 @@
+{
+  "checked_at": "2026-10-22T14:21:51.956848+00:00",
+  "services": [
+    {
+      "service_id": "docker",
+      "base_url": "http://127.0.0.1:8088",
+      "health": {
+        "http_status": 200,
+        "body": {
+          "ok": true,
+          "service": "local-qwen-playground",
+          "service_id": "docker",
+          "started_at": "2026-10-22T14:12:16.011Z"
+        }
+      },
+      "readiness": {
+        "http_status": 200,
+        "body": {
+          "api_reachable": true,
+          "selected_model_present": true,
+          "ready": true,
+          "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+          "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+          "service_id": "docker",
+          "service_name": "Docker Model Runner",
+          "backend_verified": false,
+          "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+          "checked_at": "2026-10-22T14:21:51.908Z",
+          "availability_scope": "model_catalog",
+          "models": [
+            "docker.io/ai/gpt-oss:20B-UD-Q4_K_XL",
+            "huggingface.co/mlx-community/qwen3-asr-0.6b-4bit:latest",
+            "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+          ],
+          "inference": {
+            "verified": false,
+            "note": "This check reads the model catalog only. Run a generation request to verify Docker Model Runner inference."
+          },
+          "upstream_status": 200,
+          "deployment_verification": {
+            "checked_at": "2026-10-22T04:53:38.641Z",
+            "base_url": "http://127.0.0.1:8088",
+            "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+            "backend": "vllm-metal",
+            "responses_mode": "adapter",
+            "checks": [
+              {
+                "name": "API health",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 5,
+                "service": "local-qwen-playground",
+                "started_at": "2026-10-22T04:53:25.592Z"
+              },
+              {
+                "name": "Model catalog readiness",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 24,
+                "api_reachable": true,
+                "selected_model_present": true,
+                "ready": true,
+                "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+                "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+                "service_name": "Docker Model Runner",
+                "backend_verified": false,
+                "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+                "checked_at": "2026-10-22T04:53:38.280Z",
+                "availability_scope": "model_catalog",
+                "models": [
+                  "docker.io/ai/gpt-oss:20B-UD-Q4_K_XL",
+                  "huggingface.co/mlx-community/qwen3-asr-0.6b-4bit:latest",
+                  "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+                ],
+                "inference": {
+                  "verified": false,
+                  "note": "This check reads the model catalog only. Docker Model Runner may list models from all backends; run a generation request to verify vLLM Metal inference."
+                },
+                "upstream_status": 200
+              },
+              {
+                "name": "Chat completions JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 75,
+                "text": "The capital of France is Paris.",
+                "usage": {
+                  "prompt_tokens": 29,
+                  "total_tokens": 37,
+                  "completion_tokens": 8,
+                  "prompt_tokens_details": null
+                }
+              },
+              {
+                "name": "Responses JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 48,
+                "text": "The capital of France is Paris.",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 29,
+                  "input_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "output_tokens": 8,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 37
+                }
+              },
+              {
+                "name": "Chat completions SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 62,
+                "events": 10,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 45,
+                "events": 15,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses multi-turn",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 106,
+                "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! \ud83d\ude0a",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 41,
+                  "input_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "output_tokens": 24,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 65
+                }
+              }
+            ]
+          },
+          "verification_source": "saved_snapshot"
+        }
+      },
+      "config": {
+        "http_status": 200,
+        "body": {
+          "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+          "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+          "service_id": "docker",
+          "service_name": "Docker Model Runner",
+          "snapshot_file": "service-status.json",
+          "context_length": 32768,
+          "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+          "responses_mode": "adapter",
+          "responses_capabilities": {
+            "text": true,
+            "streaming": true,
+            "stateless": true,
+            "tools": false,
+            "images": false,
+            "persistence": false,
+            "background": false,
+            "previous_response_id": false,
+            "retrieve": false,
+            "cancel": false,
+            "delete": false,
+            "input_items": false
+          },
+          "endpoints": {
+            "responses": "/v1/responses",
+            "chat_completions": "/v1/chat/completions",
+            "models": "/v1/models"
+          },
+          "deployment_doc": "/docs",
+          "comparison": {
+            "available": true,
+            "services": [
+              {
+                "id": "docker",
+                "name": "Docker Model Runner",
+                "base_path": ""
+              },
+              {
+                "id": "native",
+                "name": "Native vLLM Metal",
+                "base_path": "/compare/native"
+              },
+              {
+                "id": "sglang",
+                "name": "SGLang MLX",
+                "base_path": "/compare/sglang"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "http_status": 200,
+        "body": {
+          "api_reachable": true,
+          "selected_model_present": true,
+          "ready": true,
+          "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+          "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+          "service_id": "docker",
+          "service_name": "Docker Model Runner",
+          "backend_verified": false,
+          "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+          "checked_at": "2026-10-22T14:21:51.924Z",
+          "availability_scope": "model_catalog",
+          "models": [
+            "docker.io/ai/gpt-oss:20B-UD-Q4_K_XL",
+            "huggingface.co/mlx-community/qwen3-asr-0.6b-4bit:latest",
+            "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+          ],
+          "inference": {
+            "verified": false,
+            "note": "This check reads the model catalog only. Run a generation request to verify Docker Model Runner inference."
+          },
+          "upstream_status": 200,
+          "deployment_verification": {
+            "checked_at": "2026-10-22T04:53:38.641Z",
+            "base_url": "http://127.0.0.1:8088",
+            "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+            "backend": "vllm-metal",
+            "responses_mode": "adapter",
+            "checks": [
+              {
+                "name": "API health",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 5,
+                "service": "local-qwen-playground",
+                "started_at": "2026-10-22T04:53:25.592Z"
+              },
+              {
+                "name": "Model catalog readiness",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 24,
+                "api_reachable": true,
+                "selected_model_present": true,
+                "ready": true,
+                "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+                "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+                "service_name": "Docker Model Runner",
+                "backend_verified": false,
+                "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+                "checked_at": "2026-10-22T04:53:38.280Z",
+                "availability_scope": "model_catalog",
+                "models": [
+                  "docker.io/ai/gpt-oss:20B-UD-Q4_K_XL",
+                  "huggingface.co/mlx-community/qwen3-asr-0.6b-4bit:latest",
+                  "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+                ],
+                "inference": {
+                  "verified": false,
+                  "note": "This check reads the model catalog only. Docker Model Runner may list models from all backends; run a generation request to verify vLLM Metal inference."
+                },
+                "upstream_status": 200
+              },
+              {
+                "name": "Chat completions JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 75,
+                "text": "The capital of France is Paris.",
+                "usage": {
+                  "prompt_tokens": 29,
+                  "total_tokens": 37,
+                  "completion_tokens": 8,
+                  "prompt_tokens_details": null
+                }
+              },
+              {
+                "name": "Responses JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 48,
+                "text": "The capital of France is Paris.",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 29,
+                  "input_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "output_tokens": 8,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 37
+                }
+              },
+              {
+                "name": "Chat completions SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 62,
+                "events": 10,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 45,
+                "events": 15,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses multi-turn",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 106,
+                "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! \ud83d\ude0a",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 41,
+                  "input_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "output_tokens": 24,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 65
+                }
+              }
+            ]
+          },
+          "verification_source": "saved_snapshot"
+        }
+      }
+    },
+    {
+      "service_id": "native",
+      "base_url": "http://127.0.0.1:8089",
+      "health": {
+        "http_status": 200,
+        "body": {
+          "ok": true,
+          "service": "local-qwen-playground",
+          "service_id": "native",
+          "started_at": "2026-10-22T14:12:15.996Z"
+        }
+      },
+      "readiness": {
+        "http_status": 200,
+        "body": {
+          "api_reachable": true,
+          "selected_model_present": true,
+          "ready": true,
+          "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+          "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+          "service_id": "native",
+          "service_name": "Native vLLM Metal",
+          "backend_verified": false,
+          "upstream": "http://host.docker.internal:18001/v1",
+          "checked_at": "2026-10-22T14:21:51.928Z",
+          "availability_scope": "model_catalog",
+          "models": [
+            "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+          ],
+          "inference": {
+            "verified": false,
+            "note": "This check reads the model catalog only. Run a generation request to verify Native vLLM Metal inference."
+          },
+          "upstream_status": 200,
+          "deployment_verification": {
+            "checked_at": "2026-10-22T04:57:30.593Z",
+            "base_url": "http://127.0.0.1:8089",
+            "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+            "backend": "vllm-metal",
+            "responses_mode": "native",
+            "checks": [
+              {
+                "name": "API health",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 4,
+                "service": "local-qwen-playground",
+                "started_at": "2026-10-22T04:56:13.381Z"
+              },
+              {
+                "name": "Model catalog readiness",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 11,
+                "api_reachable": true,
+                "selected_model_present": true,
+                "ready": true,
+                "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+                "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+                "service_name": "Native vLLM Metal",
+                "backend_verified": false,
+                "upstream": "http://host.docker.internal:18001/v1",
+                "checked_at": "2026-10-22T04:57:29.957Z",
+                "availability_scope": "model_catalog",
+                "models": [
+                  "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+                ],
+                "inference": {
+                  "verified": false,
+                  "note": "This check reads the model catalog only. Docker Model Runner may list models from all backends; run a generation request to verify vLLM Metal inference."
+                },
+                "upstream_status": 200
+              },
+              {
+                "name": "Chat completions JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 329,
+                "text": "The capital of France is Paris.",
+                "usage": {
+                  "prompt_tokens": 29,
+                  "total_tokens": 37,
+                  "completion_tokens": 8,
+                  "prompt_tokens_details": null,
+                  "completion_tokens_details": null
+                }
+              },
+              {
+                "name": "Responses JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 63,
+                "text": "The capital of France is Paris.",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 29,
+                  "input_tokens_details": {
+                    "cached_tokens": 16,
+                    "cache_write_tokens": 0,
+                    "input_tokens_per_turn": [],
+                    "cached_tokens_per_turn": []
+                  },
+                  "output_tokens": 8,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "tool_output_tokens": 0,
+                    "output_tokens_per_turn": [],
+                    "tool_output_tokens_per_turn": []
+                  },
+                  "total_tokens": 37
+                }
+              },
+              {
+                "name": "Chat completions SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 70,
+                "events": 10,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 55,
+                "events": 14,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses multi-turn",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 106,
+                "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! \ud83d\ude0a",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 41,
+                  "input_tokens_details": {
+                    "cached_tokens": 0,
+                    "cache_write_tokens": 32,
+                    "input_tokens_per_turn": [],
+                    "cached_tokens_per_turn": []
+                  },
+                  "output_tokens": 24,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "tool_output_tokens": 0,
+                    "output_tokens_per_turn": [],
+                    "tool_output_tokens_per_turn": []
+                  },
+                  "total_tokens": 65
+                }
+              }
+            ]
+          },
+          "verification_source": "saved_snapshot"
+        }
+      },
+      "config": {
+        "http_status": 200,
+        "body": {
+          "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+          "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+          "service_id": "native",
+          "service_name": "Native vLLM Metal",
+          "snapshot_file": "service-status-native.json",
+          "context_length": 32768,
+          "upstream": "http://host.docker.internal:18001/v1",
+          "responses_mode": "native",
+          "responses_capabilities": {
+            "text": true,
+            "streaming": true,
+            "stateless": true,
+            "images": false,
+            "persistence": false,
+            "previous_response_id": false,
+            "background": false,
+            "retrieve": false,
+            "cancel": false,
+            "delete": false,
+            "input_items": false
+          },
+          "endpoints": {
+            "responses": "/v1/responses",
+            "chat_completions": "/v1/chat/completions",
+            "models": "/v1/models"
+          },
+          "deployment_doc": "/docs",
+          "comparison": {
+            "available": false,
+            "services": [
+              {
+                "id": "native",
+                "name": "Native vLLM Metal",
+                "base_path": ""
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "http_status": 200,
+        "body": {
+          "api_reachable": true,
+          "selected_model_present": true,
+          "ready": true,
+          "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+          "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+          "service_id": "native",
+          "service_name": "Native vLLM Metal",
+          "backend_verified": false,
+          "upstream": "http://host.docker.internal:18001/v1",
+          "checked_at": "2026-10-22T14:21:51.942Z",
+          "availability_scope": "model_catalog",
+          "models": [
+            "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+          ],
+          "inference": {
+            "verified": false,
+            "note": "This check reads the model catalog only. Run a generation request to verify Native vLLM Metal inference."
+          },
+          "upstream_status": 200,
+          "deployment_verification": {
+            "checked_at": "2026-10-22T04:57:30.593Z",
+            "base_url": "http://127.0.0.1:8089",
+            "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+            "backend": "vllm-metal",
+            "responses_mode": "native",
+            "checks": [
+              {
+                "name": "API health",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 4,
+                "service": "local-qwen-playground",
+                "started_at": "2026-10-22T04:56:13.381Z"
+              },
+              {
+                "name": "Model catalog readiness",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 11,
+                "api_reachable": true,
+                "selected_model_present": true,
+                "ready": true,
+                "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+                "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+                "service_name": "Native vLLM Metal",
+                "backend_verified": false,
+                "upstream": "http://host.docker.internal:18001/v1",
+                "checked_at": "2026-10-22T04:57:29.957Z",
+                "availability_scope": "model_catalog",
+                "models": [
+                  "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+                ],
+                "inference": {
+                  "verified": false,
+                  "note": "This check reads the model catalog only. Docker Model Runner may list models from all backends; run a generation request to verify vLLM Metal inference."
+                },
+                "upstream_status": 200
+              },
+              {
+                "name": "Chat completions JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 329,
+                "text": "The capital of France is Paris.",
+                "usage": {
+                  "prompt_tokens": 29,
+                  "total_tokens": 37,
+                  "completion_tokens": 8,
+                  "prompt_tokens_details": null,
+                  "completion_tokens_details": null
+                }
+              },
+              {
+                "name": "Responses JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 63,
+                "text": "The capital of France is Paris.",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 29,
+                  "input_tokens_details": {
+                    "cached_tokens": 16,
+                    "cache_write_tokens": 0,
+                    "input_tokens_per_turn": [],
+                    "cached_tokens_per_turn": []
+                  },
+                  "output_tokens": 8,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "tool_output_tokens": 0,
+                    "output_tokens_per_turn": [],
+                    "tool_output_tokens_per_turn": []
+                  },
+                  "total_tokens": 37
+                }
+              },
+              {
+                "name": "Chat completions SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 70,
+                "events": 10,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 55,
+                "events": 14,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses multi-turn",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 106,
+                "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! \ud83d\ude0a",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 41,
+                  "input_tokens_details": {
+                    "cached_tokens": 0,
+                    "cache_write_tokens": 32,
+                    "input_tokens_per_turn": [],
+                    "cached_tokens_per_turn": []
+                  },
+                  "output_tokens": 24,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "tool_output_tokens": 0,
+                    "output_tokens_per_turn": [],
+                    "tool_output_tokens_per_turn": []
+                  },
+                  "total_tokens": 65
+                }
+              }
+            ]
+          },
+          "verification_source": "saved_snapshot"
+        }
+      }
+    },
+    {
+      "service_id": "sglang",
+      "base_url": "http://127.0.0.1:8090",
+      "health": {
+        "http_status": 200,
+        "body": {
+          "ok": true,
+          "service": "local-qwen-playground",
+          "service_id": "sglang",
+          "started_at": "2026-10-22T14:12:16.006Z"
+        }
+      },
+      "readiness": {
+        "http_status": 200,
+        "body": {
+          "api_reachable": true,
+          "selected_model_present": true,
+          "ready": true,
+          "model": "mlx-community/Qwen3-0.6B-4bit",
+          "backend": "SGLang 0.5.22 / MLX 0.32.2",
+          "service_id": "sglang",
+          "service_name": "SGLang MLX",
+          "backend_verified": false,
+          "upstream": "http://host.docker.internal:18002/v1",
+          "checked_at": "2026-10-22T14:21:51.946Z",
+          "availability_scope": "model_catalog",
+          "models": [
+            "mlx-community/Qwen3-0.6B-4bit"
+          ],
+          "inference": {
+            "verified": false,
+            "note": "This check reads the model catalog only. Run a generation request to verify SGLang MLX inference."
+          },
+          "upstream_status": 200,
+          "deployment_verification": {
+            "checked_at": "2026-10-22T13:45:03.470Z",
+            "base_url": "http://127.0.0.1:8090",
+            "model": "mlx-community/Qwen3-0.6B-4bit",
+            "service_id": "sglang",
+            "service_name": "SGLang MLX",
+            "backend": "SGLang 0.5.22 / MLX 0.32.2",
+            "responses_mode": "native",
+            "checks": [
+              {
+                "name": "API health",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 3,
+                "service": "local-qwen-playground",
+                "service_id": "sglang",
+                "started_at": "2026-10-22T13:40:12.760Z"
+              },
+              {
+                "name": "Model catalog readiness",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 6,
+                "api_reachable": true,
+                "selected_model_present": true,
+                "ready": true,
+                "model": "mlx-community/Qwen3-0.6B-4bit",
+                "backend": "SGLang 0.5.22 / MLX 0.32.2",
+                "service_id": "sglang",
+                "service_name": "SGLang MLX",
+                "backend_verified": false,
+                "upstream": "http://host.docker.internal:18002/v1",
+                "checked_at": "2026-10-22T13:45:02.075Z",
+                "availability_scope": "model_catalog",
+                "models": [
+                  "mlx-community/Qwen3-0.6B-4bit"
+                ],
+                "inference": {
+                  "verified": false,
+                  "note": "This check reads the model catalog only. Run a generation request to verify SGLang MLX inference."
+                },
+                "upstream_status": 200
+              },
+              {
+                "name": "Chat completions JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 532,
+                "text": "The capital of France is Paris.",
+                "usage": {
+                  "prompt_tokens": 29,
+                  "total_tokens": 37,
+                  "completion_tokens": 8,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "reasoning_tokens": 0
+                }
+              },
+              {
+                "name": "Responses JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 322,
+                "text": "The capital of France is Paris.",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 29,
+                  "input_tokens_details": {
+                    "cached_tokens": 28,
+                    "cache_write_tokens": 0
+                  },
+                  "output_tokens": 8,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 37
+                }
+              },
+              {
+                "name": "Chat completions SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 102,
+                "events": 10,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 123,
+                "events": 15,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses multi-turn",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 309,
+                "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! \ud83d\ude0a",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 41,
+                  "input_tokens_details": {
+                    "cached_tokens": 3,
+                    "cache_write_tokens": 0
+                  },
+                  "output_tokens": 24,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 65
+                }
+              }
+            ]
+          },
+          "verification_source": "saved_snapshot"
+        }
+      },
+      "config": {
+        "http_status": 200,
+        "body": {
+          "model": "mlx-community/Qwen3-0.6B-4bit",
+          "backend": "SGLang 0.5.22 / MLX 0.32.2",
+          "service_id": "sglang",
+          "service_name": "SGLang MLX",
+          "snapshot_file": "service-status-sglang.json",
+          "context_length": 32768,
+          "upstream": "http://host.docker.internal:18002/v1",
+          "responses_mode": "native",
+          "responses_capabilities": {
+            "text": true,
+            "streaming": true,
+            "stateless": true,
+            "images": false,
+            "persistence": true,
+            "previous_response_id": true,
+            "background": true,
+            "retrieve": true,
+            "cancel": true,
+            "delete": false,
+            "input_items": false,
+            "structured_outputs": true,
+            "function_calling": true,
+            "cache_usage": true,
+            "prompt_cache_key": "cache_salt_namespace",
+            "storage": "process_memory",
+            "retention": "bounded_memory",
+            "storage_limits": {
+              "ttl_seconds": 3600,
+              "max_completed": 128,
+              "max_serialized_bytes": 67108864,
+              "max_active": 8
+            }
+          },
+          "endpoints": {
+            "responses": "/v1/responses",
+            "chat_completions": "/v1/chat/completions",
+            "models": "/v1/models"
+          },
+          "deployment_doc": "/docs/sglang",
+          "comparison": {
+            "available": false,
+            "services": [
+              {
+                "id": "sglang",
+                "name": "SGLang MLX",
+                "base_path": ""
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "http_status": 200,
+        "body": {
+          "api_reachable": true,
+          "selected_model_present": true,
+          "ready": true,
+          "model": "mlx-community/Qwen3-0.6B-4bit",
+          "backend": "SGLang 0.5.22 / MLX 0.32.2",
+          "service_id": "sglang",
+          "service_name": "SGLang MLX",
+          "backend_verified": false,
+          "upstream": "http://host.docker.internal:18002/v1",
+          "checked_at": "2026-10-22T14:21:51.953Z",
+          "availability_scope": "model_catalog",
+          "models": [
+            "mlx-community/Qwen3-0.6B-4bit"
+          ],
+          "inference": {
+            "verified": false,
+            "note": "This check reads the model catalog only. Run a generation request to verify SGLang MLX inference."
+          },
+          "upstream_status": 200,
+          "deployment_verification": {
+            "checked_at": "2026-10-22T13:45:03.470Z",
+            "base_url": "http://127.0.0.1:8090",
+            "model": "mlx-community/Qwen3-0.6B-4bit",
+            "service_id": "sglang",
+            "service_name": "SGLang MLX",
+            "backend": "SGLang 0.5.22 / MLX 0.32.2",
+            "responses_mode": "native",
+            "checks": [
+              {
+                "name": "API health",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 3,
+                "service": "local-qwen-playground",
+                "service_id": "sglang",
+                "started_at": "2026-10-22T13:40:12.760Z"
+              },
+              {
+                "name": "Model catalog readiness",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 6,
+                "api_reachable": true,
+                "selected_model_present": true,
+                "ready": true,
+                "model": "mlx-community/Qwen3-0.6B-4bit",
+                "backend": "SGLang 0.5.22 / MLX 0.32.2",
+                "service_id": "sglang",
+                "service_name": "SGLang MLX",
+                "backend_verified": false,
+                "upstream": "http://host.docker.internal:18002/v1",
+                "checked_at": "2026-10-22T13:45:02.075Z",
+                "availability_scope": "model_catalog",
+                "models": [
+                  "mlx-community/Qwen3-0.6B-4bit"
+                ],
+                "inference": {
+                  "verified": false,
+                  "note": "This check reads the model catalog only. Run a generation request to verify SGLang MLX inference."
+                },
+                "upstream_status": 200
+              },
+              {
+                "name": "Chat completions JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 532,
+                "text": "The capital of France is Paris.",
+                "usage": {
+                  "prompt_tokens": 29,
+                  "total_tokens": 37,
+                  "completion_tokens": 8,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "reasoning_tokens": 0
+                }
+              },
+              {
+                "name": "Responses JSON",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 322,
+                "text": "The capital of France is Paris.",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 29,
+                  "input_tokens_details": {
+                    "cached_tokens": 28,
+                    "cache_write_tokens": 0
+                  },
+                  "output_tokens": 8,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 37
+                }
+              },
+              {
+                "name": "Chat completions SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 102,
+                "events": 10,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses SSE",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 123,
+                "events": 15,
+                "text": "The capital of France is Paris."
+              },
+              {
+                "name": "Responses multi-turn",
+                "ok": true,
+                "http_status": 200,
+                "elapsed_ms": 309,
+                "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! \ud83d\ude0a",
+                "status": "completed",
+                "usage": {
+                  "input_tokens": 41,
+                  "input_tokens_details": {
+                    "cached_tokens": 3,
+                    "cache_write_tokens": 0
+                  },
+                  "output_tokens": 24,
+                  "output_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "total_tokens": 65
+                }
+              }
+            ]
+          },
+          "verification_source": "saved_snapshot"
+        }
+      }
+    }
+  ]
+}

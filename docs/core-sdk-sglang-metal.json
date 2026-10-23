@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-23T05:53:02.044737+00:00",
+  "sdk": "openai-python 3.36.1",
+  "base_url": "http://127.0.0.1:18102/v1",
+  "model": "mlx-community/Qwen3-0.6B-4bit",
+  "evidence": "official SDK workflows with semantic assertions; not full conformance",
+  "checks": [
+    {
+      "name": "json_create",
+      "passed": true,
+      "response_id": "resp_c512a97b24f04bf8adc15215e9fa62d5",
+      "status": "completed",
+      "output_text": "}\")",
+      "duration_seconds": 0.173
+    },
+    {
+      "name": "sse_sdk_helper",
+      "passed": true,
+      "response_id": "resp_4ac25c833bec4f1b9215e85d57cb0097",
+      "status": "completed",
+      "delta_count": 11,
+      "duration_seconds": 0.103
+    },
+    {
+      "name": "function_roundtrip",
+      "passed": true,
+      "response_id": "resp_8bc6f60d346840da8ad3d12346f8f054",
+      "item_id": "fc_9539ab0d29014244869cc1e335c117be",
+      "call_id": "call_5ef86a9001624a10a1e46787",
+      "followup_id": "resp_dc98a00eb9aa4fe4b7690646b6281a7a",
+      "duration_seconds": 0.201
+    },
+    {
+      "name": "pydantic_parse",
+      "passed": true,
+      "response_id": "resp_31474c3016eb4db6bc3d6635c68d26a2",
+      "parsed": {
+        "city": "Paris"
+      },
+      "duration_seconds": 0.055
+    },
+    {
+      "name": "sdk_websocket_continuation",
+      "passed": true,
+      "first_response_id": "resp_cb183f6fc69f41e6b8155ac5826b86e0",
+      "continued_response_id": "resp_27f0475908e74274973d662ea147eb9f",
+      "duration_seconds": 0.131
+    }
+  ],
+  "passed": true
+}

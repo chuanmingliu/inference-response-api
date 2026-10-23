@@ -1,0 +1,1490 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-10-22T05:23:04.298Z",
+  "finished_at": "2026-10-22T05:23:23.446Z",
+  "status": "completed",
+  "wall_runtime_ms": 19147.964125,
+  "settings": {
+    "repeats": 1,
+    "warmups": 0,
+    "batch_repeats": 1,
+    "batch_warmups": 0,
+    "timeout_ms": 180000,
+    "temperature": 0,
+    "thinking": false,
+    "context_rows": 120
+  },
+  "methodology": {
+    "ordering": "Alternate Docker/native order every round. Never overlap services. Client concurrency is within one service only.",
+    "warmups": "Warmups are retained as raw evidence and excluded from measured summaries.",
+    "prefix_cache": "Every uncached request pair has a unique run/round/member tag at the beginning of the first user message. Identical paired prompts are sent to both services. Cached scenario deliberately repeats its exact prompt.",
+    "ttft": "Client elapsed time from fetch start to first nonempty content/output_text delta; excludes role, created, and in_progress events.",
+    "latency": "Client elapsed time until the HTTP stream ends, including terminal events and usage.",
+    "approximate_decode_rate": "(server output_tokens - 1) / seconds between first and last nonempty text delta; approximate because SSE chunks can contain multiple tokens and ignore_eos may generate invisible special tokens. Full request wall rate is the primary throughput metric.",
+    "wall_rate": "Server output_tokens / full request wall seconds.",
+    "concurrency_goodput": "Sum of successful server output token counts / complete batch wall seconds. Never sum per-request rates. Aggregate includes failed batch wall time.",
+    "percentiles": "p95 uses nearest rank; median is the central value or mean of the central pair. With 10 serial samples, p95 is the observed maximum.",
+    "scope": "Comparison of the two deployed configurations, including different vLLM/Metal versions, gateway/network paths, adapters, and caches; not a controlled isolation of Docker overhead.",
+    "validation": "Require HTTP success, text output, terminal event, supported finish/status and server usage. Fixed-output cases additionally require exact output token count. Invalid samples are retained and excluded from latency/rate statistics."
+  },
+  "rows": [
+    {
+      "scenario": "chat_short",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 31,
+        "median": 31,
+        "p95": 31,
+        "max": 31
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 49,
+        "median": 49,
+        "p95": 49,
+        "max": 49
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 56.907458000000005,
+        "median": 56.907458000000005,
+        "p95": 56.907458000000005,
+        "max": 56.907458000000005
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 156.36837500000001,
+        "median": 156.36837500000001,
+        "p95": 156.36837500000001,
+        "max": 156.36837500000001
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 198.24980594701455,
+        "median": 198.24980594701455,
+        "p95": 198.24980594701455,
+        "max": 198.24980594701455
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 315.6026037214807,
+        "median": 315.6026037214807,
+        "p95": 315.6026037214807,
+        "max": 315.6026037214807
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 156.5975,
+        "median": 156.5975,
+        "p95": 156.5975,
+        "max": 156.5975
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 197.9597375437028,
+        "median": 197.9597375437028,
+        "p95": 197.9597375437028,
+        "max": 197.9597375437028
+      },
+      "aggregate_goodput_tokens_per_second": 197.9597375437028,
+      "finished": {
+        "stop": 1
+      },
+      "errors_detail": [],
+      "notes": "Natural completion, maximum 64 output tokens; output lengths may differ."
+    },
+    {
+      "scenario": "chat_short",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 34,
+        "median": 34,
+        "p95": 34,
+        "max": 34
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 49,
+        "median": 49,
+        "p95": 49,
+        "max": 49
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 127.26658400000002,
+        "median": 127.26658400000002,
+        "p95": 127.26658400000002,
+        "max": 127.26658400000002
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 247.10650000000004,
+        "median": 247.10650000000004,
+        "p95": 247.10650000000004,
+        "max": 247.10650000000004
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 137.59249554341952,
+        "median": 137.59249554341952,
+        "p95": 137.59249554341952,
+        "max": 137.59249554341952
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 282.2684115986657,
+        "median": 282.2684115986657,
+        "p95": 282.2684115986657,
+        "max": 282.2684115986657
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 247.142583,
+        "median": 247.142583,
+        "p95": 247.142583,
+        "max": 247.142583
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 137.5724069372537,
+        "median": 137.5724069372537,
+        "p95": 137.5724069372537,
+        "max": 137.5724069372537
+      },
+      "aggregate_goodput_tokens_per_second": 137.5724069372537,
+      "finished": {
+        "stop": 1
+      },
+      "errors_detail": [],
+      "notes": "Natural completion, maximum 64 output tokens; output lengths may differ."
+    },
+    {
+      "scenario": "chat_decode_128",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 71,
+        "median": 71,
+        "p95": 71,
+        "max": 71
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 48.782542000000035,
+        "median": 48.782542000000035,
+        "p95": 48.782542000000035,
+        "max": 48.782542000000035
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 475.6201669999999,
+        "median": 475.6201669999999,
+        "p95": 475.6201669999999,
+        "max": 475.6201669999999
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 269.1223141511576,
+        "median": 269.1223141511576,
+        "p95": 269.1223141511576,
+        "max": 269.1223141511576
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 298.77308948430465,
+        "median": 298.77308948430465,
+        "p95": 298.77308948430465,
+        "max": 298.77308948430465
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 475.67841699999997,
+        "median": 475.67841699999997,
+        "p95": 475.67841699999997,
+        "max": 475.67841699999997
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 269.08935832587923,
+        "median": 269.08935832587923,
+        "p95": 269.08935832587923,
+        "max": 269.08935832587923
+      },
+      "aggregate_goodput_tokens_per_second": 269.08935832587923,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Exactly 128 output tokens requested using max_tokens and ignore_eos; mismatches are errors. min_tokens is unsupported by native Metal."
+    },
+    {
+      "scenario": "chat_decode_128",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 71,
+        "median": 71,
+        "p95": 71,
+        "max": 71
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 29.42500000000001,
+        "median": 29.42500000000001,
+        "p95": 29.42500000000001,
+        "max": 29.42500000000001
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 472.83875000000006,
+        "median": 472.83875000000006,
+        "p95": 472.83875000000006,
+        "max": 472.83875000000006
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 270.7053937520983,
+        "median": 270.7053937520983,
+        "p95": 270.7053937520983,
+        "max": 270.7053937520983
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 286.58618727780913,
+        "median": 286.58618727780913,
+        "p95": 286.58618727780913,
+        "max": 286.58618727780913
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 472.899833,
+        "median": 472.899833,
+        "p95": 472.899833,
+        "max": 472.899833
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 270.6704275786877,
+        "median": 270.6704275786877,
+        "p95": 270.6704275786877,
+        "max": 270.6704275786877
+      },
+      "aggregate_goodput_tokens_per_second": 270.6704275786877,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Exactly 128 output tokens requested using max_tokens and ignore_eos; mismatches are errors. min_tokens is unsupported by native Metal."
+    },
+    {
+      "scenario": "chat_decode_512",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 512,
+        "median": 512,
+        "p95": 512,
+        "max": 512
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 71,
+        "median": 71,
+        "p95": 71,
+        "max": 71
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 27.110875000000078,
+        "median": 27.110875000000078,
+        "p95": 27.110875000000078,
+        "max": 27.110875000000078
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 1792.62475,
+        "median": 1792.62475,
+        "p95": 1792.62475,
+        "max": 1792.62475
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 285.6147110542795,
+        "median": 285.6147110542795,
+        "p95": 285.6147110542795,
+        "max": 285.6147110542795
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 290.1837673263077,
+        "median": 290.1837673263077,
+        "p95": 290.1837673263077,
+        "max": 290.1837673263077
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 1792.6745420000002,
+        "median": 1792.6745420000002,
+        "p95": 1792.6745420000002,
+        "max": 1792.6745420000002
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 285.606778031659,
+        "median": 285.606778031659,
+        "p95": 285.606778031659,
+        "max": 285.606778031659
+      },
+      "aggregate_goodput_tokens_per_second": 285.606778031659,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Exactly 512 output tokens requested using max_tokens and ignore_eos; mismatches are errors. min_tokens is unsupported by native Metal."
+    },
+    {
+      "scenario": "chat_decode_512",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 512,
+        "median": 512,
+        "p95": 512,
+        "max": 512
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 71,
+        "median": 71,
+        "p95": 71,
+        "max": 71
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 48.67533400000002,
+        "median": 48.67533400000002,
+        "p95": 48.67533400000002,
+        "max": 48.67533400000002
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 2160.16175,
+        "median": 2160.16175,
+        "p95": 2160.16175,
+        "max": 2160.16175
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 237.01928802322323,
+        "median": 237.01928802322323,
+        "p95": 237.01928802322323,
+        "max": 237.01928802322323
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 242.02436094263192,
+        "median": 242.02436094263192,
+        "p95": 242.02436094263192,
+        "max": 242.02436094263192
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 2160.298083,
+        "median": 2160.298083,
+        "p95": 2160.298083,
+        "max": 2160.298083
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 237.0043301103091,
+        "median": 237.0043301103091,
+        "p95": 237.0043301103091,
+        "max": 237.0043301103091
+      },
+      "aggregate_goodput_tokens_per_second": 237.0043301103091,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Exactly 512 output tokens requested using max_tokens and ignore_eos; mismatches are errors. min_tokens is unsupported by native Metal."
+    },
+    {
+      "scenario": "chat_context_2k",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 1993,
+        "median": 1993,
+        "p95": 1993,
+        "max": 1993
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 359.76604099999986,
+        "median": 359.76604099999986,
+        "p95": 359.76604099999986,
+        "max": 359.76604099999986
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 890.6115829999999,
+        "median": 890.6115829999999,
+        "p95": 890.6115829999999,
+        "max": 890.6115829999999
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 143.72146336659537,
+        "median": 143.72146336659537,
+        "p95": 143.72146336659537,
+        "max": 143.72146336659537
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 239.8564069212972,
+        "median": 239.8564069212972,
+        "p95": 239.8564069212972,
+        "max": 239.8564069212972
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 890.6472080000003,
+        "median": 890.6472080000003,
+        "p95": 890.6472080000003,
+        "max": 890.6472080000003
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 143.71571465140659,
+        "median": 143.71571465140659,
+        "p95": 143.71571465140659,
+        "max": 143.71571465140659
+      },
+      "aggregate_goodput_tokens_per_second": 143.71571465140659,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Approximately 2,000 input tokens; unique early prefix per pair limits prefix reuse. Consult server-reported prompt counts for actual size."
+    },
+    {
+      "scenario": "chat_context_2k",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 1993,
+        "median": 1993,
+        "p95": 1993,
+        "max": 1993
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 276.8700409999992,
+        "median": 276.8700409999992,
+        "p95": 276.8700409999992,
+        "max": 276.8700409999992
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 871.9896249999993,
+        "median": 871.9896249999993,
+        "p95": 871.9896249999993,
+        "max": 871.9896249999993
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 146.79073733245406,
+        "median": 146.79073733245406,
+        "p95": 146.79073733245406,
+        "max": 146.79073733245406
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 213.4913354802054,
+        "median": 213.4913354802054,
+        "p95": 213.4913354802054,
+        "max": 213.4913354802054
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 872.0362080000004,
+        "median": 872.0362080000004,
+        "p95": 872.0362080000004,
+        "max": 872.0362080000004
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 146.7828959689251,
+        "median": 146.7828959689251,
+        "p95": 146.7828959689251,
+        "max": 146.7828959689251
+      },
+      "aggregate_goodput_tokens_per_second": 146.7828959689251,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Approximately 2,000 input tokens; unique early prefix per pair limits prefix reuse. Consult server-reported prompt counts for actual size."
+    },
+    {
+      "scenario": "chat_context_2k_cached",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 1989,
+        "median": 1989,
+        "p95": 1989,
+        "max": 1989
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 300.265625,
+        "median": 300.265625,
+        "p95": 300.265625,
+        "max": 300.265625
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 853.5709589999997,
+        "median": 853.5709589999997,
+        "p95": 853.5709589999997,
+        "max": 853.5709589999997
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 149.958241491672,
+        "median": 149.958241491672,
+        "p95": 149.958241491672,
+        "max": 149.958241491672
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 230.13194203558442,
+        "median": 230.13194203558442,
+        "p95": 230.13194203558442,
+        "max": 230.13194203558442
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 853.6884580000005,
+        "median": 853.6884580000005,
+        "p95": 853.6884580000005,
+        "max": 853.6884580000005
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 149.93760170996705,
+        "median": 149.93760170996705,
+        "p95": 149.93760170996705,
+        "max": 149.93760170996705
+      },
+      "aggregate_goodput_tokens_per_second": 149.93760170996705,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Identical approximately 2,000-token input for warmups and measurements; deliberately measures repeated-prompt cache behavior. Cache availability is deployment-dependent."
+    },
+    {
+      "scenario": "chat_context_2k_cached",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "chat",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 1989,
+        "median": 1989,
+        "p95": 1989,
+        "max": 1989
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 325.59449999999924,
+        "median": 325.59449999999924,
+        "p95": 325.59449999999924,
+        "max": 325.59449999999924
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 1080.7347499999996,
+        "median": 1080.7347499999996,
+        "p95": 1080.7347499999996,
+        "max": 1080.7347499999996
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 118.43794233506424,
+        "median": 118.43794233506424,
+        "p95": 118.43794233506424,
+        "max": 118.43794233506424
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 168.2050232326964,
+        "median": 168.2050232326964,
+        "p95": 168.2050232326964,
+        "max": 168.2050232326964
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 1080.777833000001,
+        "median": 1080.777833000001,
+        "p95": 1080.777833000001,
+        "max": 1080.777833000001
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 118.43322104849265,
+        "median": 118.43322104849265,
+        "p95": 118.43322104849265,
+        "max": 118.43322104849265
+      },
+      "aggregate_goodput_tokens_per_second": 118.43322104849265,
+      "finished": {
+        "length": 1
+      },
+      "errors_detail": [],
+      "notes": "Identical approximately 2,000-token input for warmups and measurements; deliberately measures repeated-prompt cache behavior. Cache availability is deployment-dependent."
+    },
+    {
+      "scenario": "responses_short",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "responses",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 33,
+        "median": 33,
+        "p95": 33,
+        "max": 33
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 49,
+        "median": 49,
+        "p95": 49,
+        "max": 49
+      },
+      "cached_tokens": {
+        "n": 1,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 35.26708300000064,
+        "median": 35.26708300000064,
+        "p95": 35.26708300000064,
+        "max": 35.26708300000064
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 140.33591700000034,
+        "median": 140.33591700000034,
+        "p95": 140.33591700000034,
+        "max": 140.33591700000034
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 235.1500649687558,
+        "median": 235.1500649687558,
+        "p95": 235.1500649687558,
+        "max": 235.1500649687558
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 315.53063788196346,
+        "median": 315.53063788196346,
+        "p95": 315.53063788196346,
+        "max": 315.53063788196346
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 140.35166700000082,
+        "median": 140.35166700000082,
+        "p95": 140.35166700000082,
+        "max": 140.35166700000082
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 235.1236768708975,
+        "median": 235.1236768708975,
+        "p95": 235.1236768708975,
+        "max": 235.1236768708975
+      },
+      "aggregate_goodput_tokens_per_second": 235.1236768708975,
+      "finished": {
+        "completed": 1
+      },
+      "errors_detail": [],
+      "notes": "Natural Responses completion, maximum 64 output tokens; Docker adapter versus native Responses protocol."
+    },
+    {
+      "scenario": "responses_short",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "responses",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 33,
+        "median": 33,
+        "p95": 33,
+        "max": 33
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 49,
+        "median": 49,
+        "p95": 49,
+        "max": 49
+      },
+      "cached_tokens": {
+        "n": 1,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 26.571249999999054,
+        "median": 26.571249999999054,
+        "p95": 26.571249999999054,
+        "max": 26.571249999999054
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 199.27729100000033,
+        "median": 199.27729100000033,
+        "p95": 199.27729100000033,
+        "max": 199.27729100000033
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 165.59839726042816,
+        "median": 165.59839726042816,
+        "p95": 165.59839726042816,
+        "max": 165.59839726042816
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 190.37661104347828,
+        "median": 190.37661104347828,
+        "p95": 190.37661104347828,
+        "max": 190.37661104347828
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 199.31687500000044,
+        "median": 199.31687500000044,
+        "p95": 199.31687500000044,
+        "max": 199.31687500000044
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 165.56550969404836,
+        "median": 165.56550969404836,
+        "p95": 165.56550969404836,
+        "max": 165.56550969404836
+      },
+      "aggregate_goodput_tokens_per_second": 165.56550969404836,
+      "finished": {
+        "completed": 1
+      },
+      "errors_detail": [],
+      "notes": "Natural Responses completion, maximum 64 output tokens; Docker adapter versus native Responses protocol."
+    },
+    {
+      "scenario": "responses_long",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "responses",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 256,
+        "median": 256,
+        "p95": 256,
+        "max": 256
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 70,
+        "median": 70,
+        "p95": 70,
+        "max": 70
+      },
+      "cached_tokens": {
+        "n": 1,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 26.840500000000247,
+        "median": 26.840500000000247,
+        "p95": 26.840500000000247,
+        "max": 26.840500000000247
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 885.1453750000001,
+        "median": 885.1453750000001,
+        "p95": 885.1453750000001,
+        "max": 885.1453750000001
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 289.2180281685367,
+        "median": 289.2180281685367,
+        "p95": 289.2180281685367,
+        "max": 289.2180281685367
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 297.13304470109017,
+        "median": 297.13304470109017,
+        "p95": 297.13304470109017,
+        "max": 297.13304470109017
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 885.1606249999986,
+        "median": 885.1606249999986,
+        "p95": 885.1606249999986,
+        "max": 885.1606249999986
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 289.2130453724152,
+        "median": 289.2130453724152,
+        "p95": 289.2130453724152,
+        "max": 289.2130453724152
+      },
+      "aggregate_goodput_tokens_per_second": 289.2130453724152,
+      "finished": {
+        "max_output_tokens": 1
+      },
+      "errors_detail": [],
+      "notes": "Natural Responses completion, maximum 256 output tokens; lengths can differ, so wall latency alone does not isolate decode performance."
+    },
+    {
+      "scenario": "responses_long",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "responses",
+      "concurrency": 1,
+      "n": 1,
+      "succeeded": 1,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 1,
+        "min": 256,
+        "median": 256,
+        "p95": 256,
+        "max": 256
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 70,
+        "median": 70,
+        "p95": 70,
+        "max": 70
+      },
+      "cached_tokens": {
+        "n": 1,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "ttft_ms": {
+        "n": 1,
+        "min": 47.92316700000083,
+        "median": 47.92316700000083,
+        "p95": 47.92316700000083,
+        "max": 47.92316700000083
+      },
+      "latency_ms": {
+        "n": 1,
+        "min": 1021.5962090000012,
+        "median": 1021.5962090000012,
+        "p95": 1021.5962090000012,
+        "max": 1021.5962090000012
+      },
+      "wall_tokens_per_second": {
+        "n": 1,
+        "min": 250.58824391154303,
+        "median": 250.58824391154303,
+        "p95": 250.58824391154303,
+        "max": 250.58824391154303
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 1,
+        "min": 261.99139306491963,
+        "median": 261.99139306491963,
+        "p95": 261.99139306491963,
+        "max": 261.99139306491963
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 1021.6127500000002,
+        "median": 1021.6127500000002,
+        "p95": 1021.6127500000002,
+        "max": 1021.6127500000002
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 250.5841866206152,
+        "median": 250.5841866206152,
+        "p95": 250.5841866206152,
+        "max": 250.5841866206152
+      },
+      "aggregate_goodput_tokens_per_second": 250.5841866206152,
+      "finished": {
+        "max_output_tokens": 1
+      },
+      "errors_detail": [],
+      "notes": "Natural Responses completion, maximum 256 output tokens; lengths can differ, so wall latency alone does not isolate decode performance."
+    },
+    {
+      "scenario": "chat_concurrency4",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "chat",
+      "concurrency": 4,
+      "n": 4,
+      "succeeded": 4,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 4,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 4,
+        "min": 69,
+        "median": 69,
+        "p95": 69,
+        "max": 69
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 4,
+        "min": 63.253082999999606,
+        "median": 734.4195209999998,
+        "p95": 1382.9619579999999,
+        "max": 1382.9619579999999
+      },
+      "latency_ms": {
+        "n": 4,
+        "min": 500.2834579999999,
+        "median": 1153.1155624999992,
+        "p95": 1796.935958,
+        "max": 1796.935958
+      },
+      "wall_tokens_per_second": {
+        "n": 4,
+        "min": 71.23236608969901,
+        "median": 114.9795528559757,
+        "p95": 255.85495173418275,
+        "max": 255.85495173418275
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 4,
+        "min": 291.7270399029916,
+        "median": 304.62759996513125,
+        "p95": 307.94634944151267,
+        "max": 307.94634944151267
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 1796.9573330000003,
+        "median": 1796.9573330000003,
+        "p95": 1796.9573330000003,
+        "max": 1796.9573330000003
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 284.9260750922904,
+        "median": 284.9260750922904,
+        "p95": 284.9260750922904,
+        "max": 284.9260750922904
+      },
+      "aggregate_goodput_tokens_per_second": 284.9260750922904,
+      "finished": {
+        "length": 4
+      },
+      "errors_detail": [],
+      "notes": "Four simultaneous client requests to one service; exactly 128 output tokens each. Deployed engines permit one active sequence, so this measures queue behavior as well as throughput."
+    },
+    {
+      "scenario": "chat_concurrency4",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "chat",
+      "concurrency": 4,
+      "n": 4,
+      "succeeded": 4,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 4,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 4,
+        "min": 69,
+        "median": 69,
+        "p95": 69,
+        "max": 69
+      },
+      "cached_tokens": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "ttft_ms": {
+        "n": 4,
+        "min": 31.165875000000597,
+        "median": 759.0433545000005,
+        "p95": 1498.1905420000003,
+        "max": 1498.1905420000003
+      },
+      "latency_ms": {
+        "n": 4,
+        "min": 493.1419999999998,
+        "median": 1225.9343130000007,
+        "p95": 2004.7991249999995,
+        "max": 2004.7991249999995
+      },
+      "wall_tokens_per_second": {
+        "n": 4,
+        "min": 63.84679562347676,
+        "median": 108.91025355601896,
+        "p95": 259.5601266977869,
+        "max": 259.5601266977869
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 4,
+        "min": 250.7248232541516,
+        "median": 272.16127796259923,
+        "p95": 275.5321981969405,
+        "max": 275.5321981969405
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 2005.1263330000002,
+        "median": 2005.1263330000002,
+        "p95": 2005.1263330000002,
+        "max": 2005.1263330000002
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 255.34550695065852,
+        "median": 255.34550695065852,
+        "p95": 255.34550695065852,
+        "max": 255.34550695065852
+      },
+      "aggregate_goodput_tokens_per_second": 255.34550695065852,
+      "finished": {
+        "length": 4
+      },
+      "errors_detail": [],
+      "notes": "Four simultaneous client requests to one service; exactly 128 output tokens each. Deployed engines permit one active sequence, so this measures queue behavior as well as throughput."
+    },
+    {
+      "scenario": "responses_concurrency4",
+      "service": "docker",
+      "label": "Docker Model Runner + Responses adapter",
+      "endpoint": "responses",
+      "concurrency": 4,
+      "n": 4,
+      "succeeded": 4,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 4,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 4,
+        "min": 62,
+        "median": 62,
+        "p95": 62,
+        "max": 62
+      },
+      "cached_tokens": {
+        "n": 4,
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "ttft_ms": {
+        "n": 4,
+        "min": 24.841999999998734,
+        "median": 672.837625000001,
+        "p95": 1314.2116669999996,
+        "max": 1314.2116669999996
+      },
+      "latency_ms": {
+        "n": 4,
+        "min": 444.5321669999994,
+        "median": 1088.198104,
+        "p95": 1725.2767920000006,
+        "max": 1725.2767920000006
+      },
+      "wall_tokens_per_second": {
+        "n": 4,
+        "min": 74.19099392835278,
+        "median": 122.33173818148279,
+        "p95": 287.9431670014561,
+        "max": 287.9431670014561
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 4,
+        "min": 302.7352845699869,
+        "median": 305.82573255450586,
+        "p95": 309.01787796897503,
+        "max": 309.01787796897503
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 1725.587708000001,
+        "median": 1725.587708000001,
+        "p95": 1725.587708000001,
+        "max": 1725.587708000001
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 296.7105048478937,
+        "median": 296.7105048478937,
+        "p95": 296.7105048478937,
+        "max": 296.7105048478937
+      },
+      "aggregate_goodput_tokens_per_second": 296.7105048478937,
+      "finished": {
+        "max_output_tokens": 4
+      },
+      "errors_detail": [],
+      "notes": "Four simultaneous Responses requests to one service, maximum 128 tokens each; natural output length. One active engine sequence means requests can queue."
+    },
+    {
+      "scenario": "responses_concurrency4",
+      "service": "native",
+      "label": "Native vLLM Metal + native Responses",
+      "endpoint": "responses",
+      "concurrency": 4,
+      "n": 4,
+      "succeeded": 4,
+      "errors": 0,
+      "batches": 1,
+      "successful_batches": 1,
+      "output_tokens": {
+        "n": 4,
+        "min": 128,
+        "median": 128,
+        "p95": 128,
+        "max": 128
+      },
+      "prompt_tokens": {
+        "n": 4,
+        "min": 62,
+        "median": 62,
+        "p95": 62,
+        "max": 62
+      },
+      "cached_tokens": {
+        "n": 4,
+        "min": 0,
+        "median": 16,
+        "p95": 16,
+        "max": 16
+      },
+      "ttft_ms": {
+        "n": 4,
+        "min": 126.98062500000015,
+        "median": 860.1883745000014,
+        "p95": 1611.6033750000024,
+        "max": 1611.6033750000024
+      },
+      "latency_ms": {
+        "n": 4,
+        "min": 591.8207079999993,
+        "median": 1334.9570205000018,
+        "p95": 2146.9387910000005,
+        "max": 2146.9387910000005
+      },
+      "wall_tokens_per_second": {
+        "n": 4,
+        "min": 59.619771432971405,
+        "median": 99.31389035580412,
+        "p95": 216.28171888841737,
+        "max": 216.28171888841737
+      },
+      "approximate_decode_tokens_per_second": {
+        "n": 4,
+        "min": 237.26718673404562,
+        "median": 267.94583782785486,
+        "p95": 273.4669010563675,
+        "max": 273.4669010563675
+      },
+      "batch_latency_ms": {
+        "n": 1,
+        "min": 2147.180416000003,
+        "median": 2147.180416000003,
+        "p95": 2147.180416000003,
+        "max": 2147.180416000003
+      },
+      "batch_goodput_tokens_per_second": {
+        "n": 1,
+        "min": 238.45224937073908,
+        "median": 238.45224937073908,
+        "p95": 238.45224937073908,
+        "max": 238.45224937073908
+      },
+      "aggregate_goodput_tokens_per_second": 238.45224937073908,
+      "finished": {
+        "max_output_tokens": 4
+      },
+      "errors_detail": [],
+      "notes": "Four simultaneous Responses requests to one service, maximum 128 tokens each; natural output length. One active engine sequence means requests can queue."
+    }
+  ]
+}

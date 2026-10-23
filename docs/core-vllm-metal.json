@@ -1,0 +1,146 @@
+{
+  "checked_at": "2026-10-23T05:59:15.092Z",
+  "base_url": "http://127.0.0.1:8089/",
+  "scope": "live service Core and transient WebSocket acceptance",
+  "hardware_attestation": "not_performed_by_this_script",
+  "pending_gates": [
+    "M05 engine kill/restart under load",
+    "M06 unified-memory pressure"
+  ],
+  "checks": [
+    {
+      "name": "service_configuration",
+      "status": "passed",
+      "duration_ms": 15,
+      "service_id": "native",
+      "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+    },
+    {
+      "name": "json_create_and_usage",
+      "status": "passed",
+      "duration_ms": 241,
+      "response_id": "resp_6f0e24703d2e4edcaced43a83852d7d5",
+      "usage": {
+        "input_tokens": 19,
+        "output_tokens": 6,
+        "total_tokens": 25,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "name": "typed_items_and_all_roles",
+      "status": "passed",
+      "duration_ms": 60,
+      "response_id": "resp_fad25f555931413999526c9286a954c0"
+    },
+    {
+      "name": "sse_lifecycle_reconstruction",
+      "status": "passed",
+      "duration_ms": 56,
+      "event_count": 17,
+      "response_id": "resp_be4df90f76744573b7960c2d12037fd8"
+    },
+    {
+      "name": "http_abort_after_delta_then_independent_create",
+      "status": "passed",
+      "duration_ms": 59,
+      "interrupted_response_id": "resp_e435323ecd0e445e9bfd63eaffd709c9",
+      "followup_response_id": "resp_b34c5034961c4fcd88a11b737072c6a8",
+      "first_delta_ms": 25,
+      "client_abort_observed": true,
+      "abort_to_followup_completed_ms": 34,
+      "timing_scope": "Client-observed abort and successful followup; not engine cancellation latency."
+    },
+    {
+      "name": "function_call_and_manual_result_continuation",
+      "status": "passed",
+      "duration_ms": 456,
+      "call_id": "chatcmpl-tool-8e026be9f58b715d",
+      "response_id": "resp_a6c98ec270f0456fa261fbf2451a441a",
+      "continuation_response_id": "resp_50b3e4bdef714f9cbe977ed435933d60"
+    },
+    {
+      "name": "strict_function_rejects_adversarial_enum",
+      "status": "passed",
+      "duration_ms": 131,
+      "response_id": "resp_953caf7aac9b42b39814aa38c98f961f",
+      "call_id": "chatcmpl-tool-9d1d65d90f52be3f",
+      "constrained_city": "Paris"
+    },
+    {
+      "name": "parallel_false_blocks_prompted_second_call",
+      "status": "passed",
+      "duration_ms": 136,
+      "response_id": "resp_6cff2ecec94b48699ab75b1a4b69deae",
+      "call_id": "chatcmpl-tool-8a3d6f8593876e59",
+      "function_call_count": 1
+    },
+    {
+      "name": "forced_function_excludes_other_declared_name",
+      "status": "passed",
+      "duration_ms": 149,
+      "response_id": "resp_ef2ade4505224700898225ae49b7bec7",
+      "call_id": "chatcmpl-tool-bb8a09ee6b7b9da1",
+      "selected_name": "lookup_weather"
+    },
+    {
+      "name": "strict_json_schema",
+      "status": "passed",
+      "duration_ms": 107,
+      "response_id": "resp_6b852850fcd94fd98def12ab231dadf9",
+      "usage": {
+        "input_tokens": 21,
+        "output_tokens": 16,
+        "total_tokens": 37,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "name": "output_limit_incomplete",
+      "status": "passed",
+      "duration_ms": 18,
+      "response_id": "resp_5bc3d78f1c1e4019b29db254eb0a000d"
+    },
+    {
+      "name": "unsupported_and_context_admission_errors",
+      "status": "passed",
+      "duration_ms": 8,
+      "cases": 4
+    },
+    {
+      "name": "websocket_two_turn_and_reconnect",
+      "status": "passed",
+      "duration_ms": 133,
+      "response_id": "resp_205b866ef08e46c2b41929aa6debbc4e",
+      "continuation_response_id": "resp_abf8b7e2e4c5457d80da45a654cc1038"
+    },
+    {
+      "name": "websocket_disconnect_during_generation_then_full_replay",
+      "status": "passed",
+      "duration_ms": 107,
+      "interrupted_response_id": "resp_ac2b249c709b46119be06013248ae65b",
+      "former_parent_response_id": "resp_355af7499e7848a5aaeacdbc8808f907",
+      "replay_response_id": "resp_9298a5af0afb45488964ad2eecf4c179",
+      "first_delta_ms": 29,
+      "client_disconnect_observed": true,
+      "disconnect_to_replay_completed_ms": 35,
+      "timing_scope": "Client-observed disconnection and successful full replay; not engine cancellation latency."
+    },
+    {
+      "name": "websocket_incremental_function_result",
+      "status": "passed",
+      "duration_ms": 231,
+      "response_id": "resp_665695af8630414791125d140fb32755",
+      "continuation_response_id": "resp_c02f01b48b6c4e4492c7703917b8c897",
+      "call_id": "chatcmpl-tool-9ab89e8aac139c6f"
+    }
+  ],
+  "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+  "runtime_profile": "vllm-metal",
+  "passed": true,
+  "completed_at": "2026-10-23T05:59:17.002Z"
+}

@@ -1,0 +1,15 @@
+*
+!Dockerfile
+!package.json
+!package-lock.json
+!lib
+!lib/**
+!config
+!config/**
+!server.mjs
+!responses.mjs
+!sglang-responses.mjs
+!public
+!public/**
+!docs
+!docs/**

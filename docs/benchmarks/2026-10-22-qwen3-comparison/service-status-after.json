@@ -1,0 +1,35 @@
+{
+  "captured_at": "2026-10-22T12:34:41.036862+00:00",
+  "note": "Follow-up service check after restarting Docker Desktop, hours after benchmark. These requests are not benchmark samples.",
+  "containers": {
+    "exit_code": 0,
+    "output": "NAME                                  IMAGE                   COMMAND                  SERVICE             CREATED       STATUS                    PORTS\nresponsible-api-native-playground-1   responsible-api:local   \"docker-entrypoint.s\u2026\"   native-playground   8 hours ago   Up 53 seconds (healthy)   127.0.0.1:8089->8088/tcp\nresponsible-api-playground-1          responsible-api:local   \"docker-entrypoint.s\u2026\"   playground          8 hours ago   Up 53 seconds (healthy)   127.0.0.1:8088->8088/tcp\n",
+    "error": ""
+  },
+  "8088": {
+    "http_status": 200,
+    "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+    "output": "Ready.",
+    "usage": {
+      "prompt_tokens": 18,
+      "total_tokens": 21,
+      "completion_tokens": 3,
+      "prompt_tokens_details": null
+    },
+    "inference_verified": true
+  },
+  "8089": {
+    "http_status": 200,
+    "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+    "output": "Ready.",
+    "usage": {
+      "prompt_tokens": 18,
+      "total_tokens": 21,
+      "completion_tokens": 3,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": null
+    },
+    "inference_verified": true
+  },
+  "finished_at": "2026-10-22T12:34:53.688310+00:00"
+}

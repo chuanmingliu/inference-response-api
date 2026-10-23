@@ -1,0 +1,17 @@
+{
+  "sdk": "openai-python 3.36.1",
+  "base_url": "http://127.0.0.1:8090/v1",
+  "responses_json": {
+    "status": "completed",
+    "output_text": "ready"
+  },
+  "responses_stream": {
+    "status": "completed",
+    "output_text": "ready",
+    "delta_count": 1
+  },
+  "chat_stream": {
+    "output_text": "ready"
+  },
+  "recorded_at": "2026-10-22T13:46:53.082965+00:00"
+}

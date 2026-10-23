@@ -1,0 +1,37 @@
+{
+  "verified_at": "2026-10-22T04:54:11.841999+00:00",
+  "python": "/Users/chuanmingliu/responsible-api/.runtime/native-venv/bin/python",
+  "python_version": "3.12.4",
+  "architecture": "arm64",
+  "macos_version": "26.6.2",
+  "packages": {
+    "vllm": "0.32.0+cpu",
+    "vllm-metal": "0.32.0",
+    "mlx": "0.32.2",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.19.0"
+  },
+  "wheels": {
+    "vllm": "https://github.com/vllm-project/vllm/releases/download/v0.32.0/vllm-0.32.0%2Bcpu-cp38-abi3-macosx_11_0_arm64.whl",
+    "vllm-metal": "https://github.com/vllm-project/vllm-metal/releases/download/v0.32.0/vllm_metal-0.32.0-cp312-cp312-macosx_15_0_arm64.whl"
+  },
+  "configuration_updated_at": "2026-10-22T14:18:16.893013+00:00",
+  "model_digest": "sha256:4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc",
+  "served_model_name": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+  "context_length": 32768,
+  "max_num_seqs": 1,
+  "gpu_memory_utilization": 0.1,
+  "enable_prefix_caching": true,
+  "prefix_cache_implementation": "paged",
+  "enable_prompt_tokens_details": true,
+  "default_chat_template_kwargs": {
+    "enable_thinking": false
+  },
+  "responses_mode": "native",
+  "launcher": "scripts/native-service.py",
+  "launch_agent": "local.responsible-api.native",
+  "engine_base_url": "http://127.0.0.1:18001/v1",
+  "gateway_base_url": "http://127.0.0.1:8089/v1",
+  "hf_hub_offline": true,
+  "context_cache_verification": "docs/context-cache-verification.json"
+}

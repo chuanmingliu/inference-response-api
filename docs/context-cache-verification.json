@@ -1,0 +1,133 @@
+{
+  "checked_at": "2026-10-22T14:13:36.653101+00:00",
+  "context_length": 32768,
+  "local_prompt_tokens": 32753,
+  "services": [
+    {
+      "service_id": "docker",
+      "near_limit": {
+        "http_status": 200,
+        "usage": {
+          "prompt_tokens": 32753,
+          "total_tokens": 32754,
+          "completion_tokens": 1,
+          "prompt_tokens_details": null
+        },
+        "elapsed_seconds": 15.343,
+        "output_text": "",
+        "finish_reason": "stop"
+      },
+      "overflow": {
+        "http_status": 400,
+        "error": {
+          "message": "This model's maximum context length is 32768 tokens. However, your request has 32786 input tokens. Please reduce the length of the input messages. None",
+          "type": "BadRequestError",
+          "param": null,
+          "code": 400
+        }
+      },
+      "prefix_cache": {
+        "runs": [
+          {
+            "prompt_tokens": 2094,
+            "cached_tokens": 0,
+            "elapsed_seconds": 0.34
+          },
+          {
+            "prompt_tokens": 2094,
+            "cached_tokens": 0,
+            "elapsed_seconds": 0.311
+          }
+        ],
+        "reuse_verified": false
+      }
+    },
+    {
+      "service_id": "native",
+      "near_limit": {
+        "http_status": 200,
+        "usage": {
+          "prompt_tokens": 32753,
+          "total_tokens": 32754,
+          "completion_tokens": 1,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 32752,
+            "multimodal_tokens": null
+          },
+          "completion_tokens_details": null
+        },
+        "elapsed_seconds": 19.483,
+        "output_text": "",
+        "finish_reason": "stop"
+      },
+      "overflow": {
+        "http_status": 400,
+        "error": {
+          "message": "This model's maximum context length is 32768 tokens. However, your prompt contains at least 32769 input tokens, which exceeds this limit even without any output tokens. Please reduce the length of the input prompt. (parameter=input_tokens, value=32769)",
+          "type": "BadRequestError",
+          "param": "input_tokens",
+          "code": 400
+        }
+      },
+      "prefix_cache": {
+        "runs": [
+          {
+            "prompt_tokens": 2100,
+            "cached_tokens": 0,
+            "elapsed_seconds": 0.3
+          },
+          {
+            "prompt_tokens": 2100,
+            "cached_tokens": 2080,
+            "elapsed_seconds": 0.07
+          }
+        ],
+        "reuse_verified": true
+      }
+    },
+    {
+      "service_id": "sglang",
+      "near_limit": {
+        "http_status": 200,
+        "usage": {
+          "prompt_tokens": 32753,
+          "total_tokens": 32754,
+          "completion_tokens": 1,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "reasoning_tokens": 0
+        },
+        "elapsed_seconds": 17.698,
+        "output_text": "",
+        "finish_reason": "stop"
+      },
+      "overflow": {
+        "http_status": 400,
+        "error": {
+          "object": "error",
+          "message": "The input (32786 tokens) is longer than the model's context length (32768 tokens).",
+          "type": "BadRequestError",
+          "param": null,
+          "code": 400
+        }
+      },
+      "prefix_cache": {
+        "runs": [
+          {
+            "prompt_tokens": 2101,
+            "cached_tokens": 3,
+            "elapsed_seconds": 3.583
+          },
+          {
+            "prompt_tokens": 2101,
+            "cached_tokens": 2090,
+            "elapsed_seconds": 0.145
+          }
+        ],
+        "reuse_verified": true
+      }
+    }
+  ]
+}

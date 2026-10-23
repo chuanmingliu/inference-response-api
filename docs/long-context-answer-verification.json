@@ -1,0 +1,210 @@
+{
+  "context_length": 32768,
+  "purpose": "Usable visible text with varied reference material near the supported context limit.",
+  "scope": "One deterministic prompt with its answer near the end. This does not test long-range retrieval or establish general model quality.",
+  "method": "Same prompt and output budget; temperature 0; thinking disabled; all services called sequentially.",
+  "endpoint": "/v1/chat/completions",
+  "prompt": {
+    "local_prompt_tokens": 32598,
+    "record_count": 669,
+    "closing_note_count": 1,
+    "characters": 146450,
+    "sha256": "ff56f2a022d6ed17148cf8d7c745de046af51d7db36b1759b0b5b7a6918a37db",
+    "seed": 20261022,
+    "expected_codename": "Cedar Lantern",
+    "marker_tokens_from_end_before_chat_template": 28,
+    "max_output_tokens": 128,
+    "local_input_plus_output_budget": 32726,
+    "prompt_tail": "sult in the weekly digest.\nRecord 0668, day 28: The Brookside archive now contains 37 labeled sets of equipment manuals. Amara verified that the revised layout was easier to read. The local supervisor will send a short update before lunch.\nRecord 0669, day 28: The afternoon summary from Meadow described an ordinary check of accessibility plans. According to Elliot, the revised layout was easier to read. Tomorrow the coordinator will ask the coordinator to confirm the schedule.\nThe archive follows the order of the visits.\n\nFinal handover note: The project codename is Cedar Lantern. This is the confirmed name for the project.\nWhat is the project codename?\nAnswer with only the project codename."
+  },
+  "services": [
+    {
+      "service_id": "docker",
+      "base_url": "http://127.0.0.1:8088",
+      "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+      "http_status": 200,
+      "elapsed_seconds": 16.016,
+      "response": {
+        "id": "chatcmpl-95645fa167788213",
+        "object": "chat.completion",
+        "created": 1792678731,
+        "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Cedar Lantern",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null,
+              "reasoning_content": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 32598,
+          "total_tokens": 32602,
+          "completion_tokens": 4,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      },
+      "transport_error": null,
+      "output_text": "Cedar Lantern",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 32598,
+        "total_tokens": 32602,
+        "completion_tokens": 4,
+        "prompt_tokens_details": null
+      },
+      "has_visible_text": true,
+      "answered_codename": true,
+      "exact_codename": true,
+      "reported_input_in_target_range": true
+    },
+    {
+      "service_id": "native",
+      "base_url": "http://127.0.0.1:8089",
+      "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+      "http_status": 200,
+      "elapsed_seconds": 20.862,
+      "response": {
+        "id": "chatcmpl-8c76be8811364201",
+        "object": "chat.completion",
+        "created": 1792678747,
+        "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Cedar Lantern",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.32.0-7c73c249",
+        "usage": {
+          "prompt_tokens": 32598,
+          "total_tokens": 32602,
+          "completion_tokens": 4,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 32592,
+            "multimodal_tokens": null
+          },
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      },
+      "transport_error": null,
+      "output_text": "Cedar Lantern",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 32598,
+        "total_tokens": 32602,
+        "completion_tokens": 4,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 32592,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": null
+      },
+      "has_visible_text": true,
+      "answered_codename": true,
+      "exact_codename": true,
+      "reported_input_in_target_range": true
+    },
+    {
+      "service_id": "sglang",
+      "base_url": "http://127.0.0.1:8090",
+      "model": "mlx-community/Qwen3-0.6B-4bit",
+      "http_status": 200,
+      "elapsed_seconds": 17.267,
+      "response": {
+        "id": "0e98e4280b12431cb6082ab24ad4b2a7",
+        "object": "chat.completion",
+        "created": 1792678785,
+        "model": "mlx-community/Qwen3-0.6B-4bit",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Cedar Lantern",
+              "reasoning_content": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "matched_stop": 151645
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 32598,
+          "total_tokens": 32602,
+          "completion_tokens": 4,
+          "prompt_tokens_details": {
+            "cached_tokens": 6
+          },
+          "reasoning_tokens": 0
+        },
+        "metadata": {
+          "weight_version": "default",
+          "weight_versions": [
+            {
+              "version": "default",
+              "start": 0,
+              "end": 4
+            }
+          ]
+        }
+      },
+      "transport_error": null,
+      "output_text": "Cedar Lantern",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 32598,
+        "total_tokens": 32602,
+        "completion_tokens": 4,
+        "prompt_tokens_details": {
+          "cached_tokens": 6
+        },
+        "reasoning_tokens": 0
+      },
+      "has_visible_text": true,
+      "answered_codename": true,
+      "exact_codename": true,
+      "reported_input_in_target_range": true
+    }
+  ],
+  "checked_at": "2026-10-22T14:19:45.488189+00:00"
+}

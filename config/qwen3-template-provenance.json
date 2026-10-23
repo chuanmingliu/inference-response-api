@@ -1,0 +1,8 @@
+{
+  "source": "mlx-community/Qwen3-0.6B-4bit tokenizer_config.json",
+  "bundle_digest": "4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc",
+  "original_template_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+  "template_sha256": "eccd8793472b569dd337f824bc8a4ba13e142b3c86896bb525b2e7a2d474eadc",
+  "tokenizer_config_sha256": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+  "change": "Render developer messages with their own role header instead of dropping them. No weights or upstream tokenizer files are modified."
+}

@@ -1,0 +1,4 @@
+# Official SDK and structured/socket helper versions used for Core acceptance.
+openai==3.36.1
+pydantic==2.14.1
+websockets==17.3

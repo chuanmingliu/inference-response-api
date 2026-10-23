@@ -1,0 +1,245 @@
+{
+  "schema": "responsible-api-metal-evidence-v1",
+  "recorded_at": "2026-10-23T06:00:43.073814+00:00",
+  "scope": "Read-only host and runtime provenance, correlated with separately recorded live service reports. This is not a full acceptance or production certification.",
+  "contract": "config/responses-capabilities.json",
+  "source_design": "docs/responses-implementation-spec.md",
+  "collection": {
+    "inference_started_by_this_collection": false,
+    "runtime_processes_started_or_stopped_by_this_collection": false,
+    "host_probe": "system_profiler SPHardwareDataType SPSoftwareDataType -json; sysctl -n hw.memsize",
+    "package_probe": "importlib.metadata.version in each installed Python environment",
+    "metal_probe": "Import mlx.core; read mlx.core.metal.is_available() and mlx.core.default_device() in each environment. No tensor computation or model load.",
+    "sandbox_note": "Sandboxed Metal imports could not access the device. The read-only probe outside the sandbox succeeded for both environments.",
+    "path_redactions": "Startup excerpts replace the project and home directories with <project> and <home>. Machine identifiers are omitted."
+  },
+  "host": {
+    "chip": "Apple M3 Max",
+    "model": "Mac15,9",
+    "product": "MacBook Pro",
+    "architecture": "arm64",
+    "cpu_cores": {
+      "total": 16,
+      "performance": 12,
+      "efficiency": 4
+    },
+    "physical_memory_bytes": 137438953472,
+    "physical_memory_gib": 128,
+    "macos": "26.6.2",
+    "macos_build": "25G83",
+    "kernel": "Darwin 25.6.0"
+  },
+  "model": {
+    "repository": "mlx-community/Qwen3-0.6B-4bit",
+    "local_bundle_digest": "sha256:4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc",
+    "bundle_reference_source": "Local runtime launchers and startup logs identify this content-addressed bundle; model weight files were not rehashed during this collection.",
+    "tokenizer_config_sha256": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+    "original_chat_template_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+    "selected_chat_template": "config/qwen3-responses.jinja",
+    "selected_chat_template_sha256": "eccd8793472b569dd337f824bc8a4ba13e142b3c86896bb525b2e7a2d474eadc",
+    "hash_verification": "The installed tokenizer_config.json, its original chat_template string, and the selected project template were rehashed and matched config/qwen3-template-provenance.json.",
+    "template_provenance": "config/qwen3-template-provenance.json",
+    "template_change": "Render developer messages with their own role header instead of dropping them. No weights or upstream tokenizer files are modified."
+  },
+  "runtimes": [
+    {
+      "profile": "vllm-metal",
+      "python_environment": ".runtime/native-venv",
+      "python_version": "3.12.4",
+      "architecture": "arm64",
+      "packages": {
+        "vllm": "0.32.0+cpu",
+        "vllm-metal": "0.32.0",
+        "mlx": "0.32.2",
+        "mlx-metal": "0.32.2",
+        "mlx-lm": "0.32.0",
+        "transformers": "5.19.0",
+        "torch": "2.13.0",
+        "openai": "3.36.1",
+        "xgrammar": "0.2.8"
+      },
+      "metal_probe": {
+        "available": true,
+        "default_device": "Device(gpu, 0)"
+      },
+      "launcher": "scripts/native-service.py",
+      "launch_configuration": {
+        "engine_base_url": "http://127.0.0.1:18001/v1",
+        "context_length": 32768,
+        "max_num_seqs": 1,
+        "gpu_memory_utilization": 0.1,
+        "prefix_caching": true,
+        "tool_call_parser": "hermes",
+        "tool_strict_level": "auto",
+        "enable_prompt_tokens_details": true,
+        "default_chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "environment": {
+          "VLLM_ENFORCE_STRICT_TOOL_CALLING": "1",
+          "HF_HUB_OFFLINE": "1"
+        }
+      },
+      "startup_evidence": {
+        "file": ".runtime/native-engine.log",
+        "entries": [
+          {
+            "line": 838,
+            "text": "(EngineCore pid=30489) INFO 10-23 13:59:03 [worker.py:138] MLX device set to: Device(gpu, 0)"
+          },
+          {
+            "line": 843,
+            "text": "(EngineCore pid=30489) INFO 10-23 13:59:04 [model_lifecycle.py:427] MLX-LM model loaded in 0.35s: <home>/.docker/models/bundles/sha256/4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc/model"
+          },
+          {
+            "line": 849,
+            "text": "(EngineCore pid=30489) INFO 10-23 13:59:06 [__init__.py:355] Native paged-attention Metal kernels loaded"
+          },
+          {
+            "line": 855,
+            "text": "(EngineCore pid=30489) INFO 10-23 13:59:06 [__init__.py:382] Paged-attention Metal kernel warm-up complete"
+          }
+        ]
+      },
+      "interpretation": "The native worker explicitly selects the MLX GPU, loads the local model and native Metal attention kernels. The vllm +cpu package suffix and device_config=cpu in generic vLLM configuration are not evidence of CPU model execution when this Metal plugin worker is active.",
+      "requirements_snapshot": {
+        "file": "docs/native-requirements.txt",
+        "sha256": "6468a821cbdcc98e215bb5680cf7275de18fb3439b888f99efc0cde369ad386b"
+      },
+      "historical_runtime_metadata": "docs/native-runtime.json",
+      "live_reports": [
+        "docs/core-vllm-metal.json",
+        "docs/core-sdk-vllm-metal.json",
+        "docs/core-sdk-go-vllm-metal.json"
+      ]
+    },
+    {
+      "profile": "sglang-metal",
+      "python_environment": ".runtime/sglang-venv",
+      "python_version": "3.12.4",
+      "architecture": "arm64",
+      "source_commit": "baa9befa381511cd4d56f83980951e5a45fffc6d",
+      "packages": {
+        "sglang": "0.5.22",
+        "mlx": "0.32.2",
+        "mlx-metal": "0.32.2",
+        "mlx-lm": "0.32.2",
+        "transformers": "5.19.0",
+        "torch": "2.13.0",
+        "openai": "2.6.1",
+        "xgrammar": "0.2.7"
+      },
+      "metal_probe": {
+        "available": true,
+        "default_device": "Device(gpu, 0)"
+      },
+      "launcher": "scripts/sglang-service.py",
+      "server_entrypoint": "scripts/sglang_server.py",
+      "launch_configuration": {
+        "engine_base_url": "http://127.0.0.1:18002/v1",
+        "device": "mps",
+        "context_length": 32768,
+        "max_running_requests": 1,
+        "max_total_tokens": 65536,
+        "mem_fraction_static": 0.1,
+        "mlx_enable_sampling": true,
+        "grammar_backend": "xgrammar",
+        "tool_call_parser": "qwen25",
+        "disable_cuda_graph": true,
+        "enable_cache_report": true,
+        "default_chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "environment": {
+          "SGLANG_USE_MLX": "1",
+          "HF_HUB_OFFLINE": "1"
+        }
+      },
+      "startup_evidence": {
+        "file": ".runtime/sglang-engine.err.log",
+        "entries": [
+          {
+            "line": 805,
+            "text": "[2026-10-23 13:59:56] Loading chat template from argument: <project>/config/qwen3-responses.jinja"
+          },
+          {
+            "line": 823,
+            "text": "[2026-10-23 13:59:59] Initializing MlxModelRunner for end-to-end MLX inference"
+          },
+          {
+            "line": 824,
+            "text": "[2026-10-23 13:59:59] Loading MLX model: <home>/.docker/models/bundles/sha256/4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc/model"
+          },
+          {
+            "line": 825,
+            "text": "[2026-10-23 14:00:00] MLX model loaded in 0.40s"
+          }
+        ]
+      },
+      "startup_configuration_evidence": {
+        "file": ".runtime/sglang-engine.err.log",
+        "line": 648,
+        "selected_fields": {
+          "device": "mps",
+          "mlx_enable_sampling": true,
+          "grammar_backend": "xgrammar",
+          "context_length": 32768,
+          "max_running_requests": 1,
+          "max_total_tokens": 65536,
+          "chat_template": "<project>/config/qwen3-responses.jinja"
+        }
+      },
+      "interpretation": "The selected startup uses the end-to-end MLX runner and local model with sampling enabled. The separate MLX probe confirms this environment can access the native GPU.",
+      "requirements_snapshot": {
+        "file": "docs/sglang-requirements.txt",
+        "sha256": "1e3564e7056884faf73d720ff288f01848e65328328e1c86481e22a5b59b41ca"
+      },
+      "historical_runtime_metadata": "docs/sglang-runtime.json",
+      "live_reports": [
+        "docs/core-sglang-metal.json",
+        "docs/core-sdk-sglang-metal.json",
+        "docs/core-sdk-go-sglang-metal.json"
+      ]
+    }
+  ],
+  "sdk_and_transport_pins": {
+    "node_openai": "7.43.0",
+    "python_openai_used_by_live_sdk_reports": "3.36.1",
+    "go_openai_used_by_live_sdk_reports": "github.com/openai/openai-go/v3 v3.86.0",
+    "websocket_library": {
+      "ws": "8.22.0"
+    },
+    "node_dependency_lock": "package-lock.json",
+    "go_module": "scripts/sdk-go/go.mod",
+    "go_dependency_lock": "scripts/sdk-go/go.sum"
+  },
+  "report_references": [
+    "docs/core-vllm-metal.json",
+    "docs/core-sglang-metal.json",
+    "docs/core-sdk-vllm-metal.json",
+    "docs/core-sdk-sglang-metal.json",
+    "docs/core-sdk-go-vllm-metal.json",
+    "docs/core-sdk-go-sglang-metal.json"
+  ],
+  "evidence_limits": [
+    "Linked live reports carry their own run times, assertions and outcomes. Their check counts are intentionally not copied here; consult the current report files.",
+    "GPU availability alone does not certify execution. The hardware conclusion combines native startup evidence, selected launch configuration and the separately recorded actual inference reports.",
+    "No external GPU profiler trace, energy measurement or exhaustive CPU/remote-fallback detection was collected.",
+    "Native log paths are local ignored runtime artifacts; the selected timestamped excerpts are embedded here for a portable record.",
+    "Historical native-runtime.json and sglang-runtime.json describe earlier launcher snapshots, including legacy native response modes. They do not override the current service-owned Core contract.",
+    "Python SDK tests use the pinned native environment client; the SGLang server environment independently installs openai 2.6.1."
+  ],
+  "release_gates": {
+    "full_first_version_acceptance": "not_claimed",
+    "M01_native_metal": "Native arm64 Metal/MLX startup and local live inference evidence recorded for each engine; see evidence limits.",
+    "M02_JSON_SSE_cancellation": "See each current live report and transport tests; no blanket certification from this metadata record.",
+    "M03_tools_strict_schema_sampler": "See each current live report; SGLang mlx_enable_sampling=true is confirmed in startup configuration.",
+    "M04_basic_websocket": "See each current live report and SDK report; basic connection-local scope only.",
+    "M05_live_engine_crash_restart_and_slow_reader": "pending; live kill/restart under load and slow-reader fault injection are not established by ordinary disconnect/reconnect tests.",
+    "M06_unified_memory_pressure": "pending; no measured memory-pressure sweep with TTFT, tokens/s, engine cancellation delay, memory and swap.",
+    "I02_assistant_phase": "P0 gap: explicitly unsupported by the admitted model/template profiles.",
+    "CUDA_hardware": "pending; not run on this Apple Silicon host.",
+    "official_wire_differential": "pending; official SDK workflows and source-derived fixtures do not replace captured official-service wire comparisons.",
+    "production_load_and_soak": "not_certified"
+  }
+}

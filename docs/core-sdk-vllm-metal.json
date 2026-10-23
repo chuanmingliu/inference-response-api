@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-23T05:50:05.855911+00:00",
+  "sdk": "openai-python 3.36.1",
+  "base_url": "http://127.0.0.1:18101/v1",
+  "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+  "evidence": "official SDK workflows with semantic assertions; not full conformance",
+  "checks": [
+    {
+      "name": "json_create",
+      "passed": true,
+      "response_id": "resp_0911713fdb194db6ab80201c2ca0ca65",
+      "status": "completed",
+      "output_text": "Assistant: Let's go over this step by step. First, I need to understand what the user is asking for. They probably want a single word ready to be used, but the question is in English. \n\nIn this case, the user is likely asking for a single word (possibly from a language or a magnifying glass) but it's not being transmitted here. Let me check the question again. \n\n\"My quest is complete, I have ready your straw. Can you see me?\" – This is a direct quote from a character in *The Mortal Dudes*...大叔...He had asked me to dissolve some chains. The single word is \"straw\".\n\nSo the correct single word is:\n\n**Straw**\n\nI mean that, dear reader.Always remember that.",
+      "duration_seconds": 1.353
+    },
+    {
+      "name": "sse_sdk_helper",
+      "passed": true,
+      "response_id": "resp_94cfd3a4bd2c4dc18a325871ca496d1b",
+      "status": "completed",
+      "delta_count": 7,
+      "duration_seconds": 0.142
+    },
+    {
+      "name": "function_roundtrip",
+      "passed": true,
+      "response_id": "resp_38f734dadb5a4b298c6adb47693c6223",
+      "item_id": "fc_8d71db1316bf49a482555134f6ee15f2",
+      "call_id": "chatcmpl-tool-aba1ff62c85d6a88",
+      "followup_id": "resp_ad08e8d75a1c4c409dcd9f696887aae2",
+      "duration_seconds": 0.367
+    },
+    {
+      "name": "pydantic_parse",
+      "passed": true,
+      "response_id": "resp_fd883f6290d34d93be24d0d3ee18515f",
+      "parsed": {
+        "city": "Paris"
+      },
+      "duration_seconds": 0.08
+    },
+    {
+      "name": "sdk_websocket_continuation",
+      "passed": true,
+      "first_response_id": "resp_cefe89f8fdd7401daf692a9935c2e2ee",
+      "continued_response_id": "resp_fc20f2ddbece4000af5b78551305877a",
+      "duration_seconds": 0.145
+    }
+  ],
+  "passed": true
+}

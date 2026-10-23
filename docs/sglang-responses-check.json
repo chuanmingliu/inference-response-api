@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-22T13:53:23.325944+00:00",
+  "sdk": "openai-python 3.36.1",
+  "model": "mlx-community/Qwen3-0.6B-4bit",
+  "responses_mode": "native",
+  "checks": [
+    {
+      "base_url": "http://127.0.0.1:8090/v1",
+      "json_status": "completed",
+      "json_output": "ready",
+      "stream_status": "completed",
+      "stream_output": "ready",
+      "stream_delta_count": 1,
+      "sdk_accumulation_matches": true
+    },
+    {
+      "base_url": "http://127.0.0.1:8088/compare/sglang/v1",
+      "json_status": "completed",
+      "json_output": "ready",
+      "stream_status": "completed",
+      "stream_output": "ready",
+      "stream_delta_count": 1,
+      "sdk_accumulation_matches": true
+    }
+  ]
+}

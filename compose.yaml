@@ -1,0 +1,104 @@
+name: responsible-api
+services:
+  playground:
+    build: .
+    image: responsible-api:local
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:${PORT:-8088}:8088"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8088
+      MODEL: ${MODEL:-huggingface.co/mlx-community/qwen3-0.6b-4bit:latest}
+      UPSTREAM_BASE_URL: http://model-runner.docker.internal/engines/vllm-metal/v1
+      RESPONSES_MODE: service
+      RUNTIME_PROFILE: dmr-metal
+      API_KEY: ${API_KEY:-}
+      API_KEYS: ${API_KEYS:-}
+      UPSTREAM_API_KEY: ${DMR_UPSTREAM_API_KEY:-}
+      RESPONSES_MAX_CONCURRENT: ${RESPONSES_MAX_CONCURRENT:-4}
+      RESPONSES_MAX_CONCURRENT_PER_TENANT: ${RESPONSES_MAX_CONCURRENT_PER_TENANT:-2}
+      CONTEXT_LENGTH: 32768
+      SERVICE_NAME: Docker Model Runner
+      SERVICE_ID: docker
+      SNAPSHOT_FILE: service-status.json
+      BACKEND_LABEL: vllm-metal 0.1.0 / vLLM 0.13.0
+      NATIVE_SERVICE_BASE_URL: http://native-playground:8088
+      SGLANG_SERVICE_BASE_URL: http://sglang-playground:8088
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 1.0
+  native-playground:
+    image: responsible-api:local
+    pull_policy: never
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:8089:8088"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8088
+      MODEL: ${MODEL:-huggingface.co/mlx-community/qwen3-0.6b-4bit:latest}
+      UPSTREAM_BASE_URL: http://host.docker.internal:18001/v1
+      RESPONSES_MODE: service
+      RUNTIME_PROFILE: vllm-metal
+      API_KEY: ${API_KEY:-}
+      API_KEYS: ${API_KEYS:-}
+      UPSTREAM_API_KEY: ${NATIVE_UPSTREAM_API_KEY:-}
+      RESPONSES_MAX_CONCURRENT: ${RESPONSES_MAX_CONCURRENT:-4}
+      RESPONSES_MAX_CONCURRENT_PER_TENANT: ${RESPONSES_MAX_CONCURRENT_PER_TENANT:-2}
+      CONTEXT_LENGTH: 32768
+      SERVICE_NAME: Native vLLM Metal
+      SERVICE_ID: native
+      SNAPSHOT_FILE: service-status-native.json
+      BACKEND_LABEL: vllm-metal 0.32.0 / vLLM 0.32.0
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 1.0
+  sglang-playground:
+    image: responsible-api:local
+    pull_policy: never
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:8090:8088"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8088
+      MODEL: ${SGLANG_MODEL:-mlx-community/Qwen3-0.6B-4bit}
+      UPSTREAM_BASE_URL: http://host.docker.internal:18002/v1
+      # SGLang reserves ':' for LoRA adapters, so its client ID has no OCI tag.
+      RESPONSES_MODE: service
+      RUNTIME_PROFILE: sglang-metal
+      API_KEY: ${API_KEY:-}
+      API_KEYS: ${API_KEYS:-}
+      UPSTREAM_API_KEY: ${SGLANG_UPSTREAM_API_KEY:-}
+      RESPONSES_MAX_CONCURRENT: ${RESPONSES_MAX_CONCURRENT:-4}
+      RESPONSES_MAX_CONCURRENT_PER_TENANT: ${RESPONSES_MAX_CONCURRENT_PER_TENANT:-2}
+      CONTEXT_LENGTH: 32768
+      SERVICE_ID: sglang
+      SERVICE_NAME: SGLang MLX
+      SNAPSHOT_FILE: service-status-sglang.json
+      BACKEND_LABEL: SGLang 0.5.22 / MLX 0.32.2
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 1.0

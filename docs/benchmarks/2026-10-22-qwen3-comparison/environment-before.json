@@ -1,0 +1,48 @@
+{
+  "captured_at": "2026-10-22T05:19:45.812421+00:00",
+  "macos": {
+    "exit_code": 0,
+    "output": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+    "error": ""
+  },
+  "cpu": {
+    "exit_code": 0,
+    "output": "Apple M3 Max",
+    "error": ""
+  },
+  "memory": {
+    "exit_code": 0,
+    "output": "137438953472",
+    "error": ""
+  },
+  "power": {
+    "exit_code": 0,
+    "output": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=36765795)\t100%; charged; 0:00 remaining present: true",
+    "error": ""
+  },
+  "thermal": {
+    "exit_code": 0,
+    "output": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+    "error": ""
+  },
+  "memory_pressure": {
+    "exit_code": 0,
+    "output": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   568189.\nPages active:                                3182230.\nPages inactive:                              3156182.\nPages speculative:                              2268.\nPages throttled:                                   0.\nPages wired down:                             425032.\nPages purgeable:                               17525.\n\"Translation faults\":                    13962448472.\nPages copy-on-write:                      1158934195.\nPages zero filled:                       15334096750.\nPages reactivated:                          21971309.\nPages purged:                               50701697.\nFile-backed pages:                           1117576.\nAnonymous pages:                             5223104.\nPages stored in compressor:                  2300821.\nPages occupied by compressor:                 995466.\nDecompressions:                             14682087.\nCompressions:                                6862641.\nPageins:                                    73171979.\nPageouts:                                      38691.\nSwapins:                                      691983.\nSwapouts:                                    1037079.",
+    "error": ""
+  },
+  "models": {
+    "exit_code": 0,
+    "output": "MODEL NAME                           BACKEND     MODE        UNTIL                \nhf.co/mlx-community/Qwen3-0.6B-4bit  vllm-metal  completion  40 minutes from now",
+    "error": ""
+  },
+  "containers": {
+    "exit_code": 0,
+    "output": "NAME                                  IMAGE                   COMMAND                  SERVICE             CREATED          STATUS                    PORTS\nresponsible-api-native-playground-1   responsible-api:local   \"docker-entrypoint.s\u2026\"   native-playground   20 minutes ago   Up 20 minutes (healthy)   127.0.0.1:8089->8088/tcp\nresponsible-api-playground-1          responsible-api:local   \"docker-entrypoint.s\u2026\"   playground          20 minutes ago   Up 20 minutes (healthy)   127.0.0.1:8088->8088/tcp",
+    "error": ""
+  },
+  "native_args": {
+    "exit_code": 0,
+    "output": "gui/501/local.responsible-api.native = {\n\tactive count = 1\n\tpath = /Users/chuanmingliu/Library/LaunchAgents/local.responsible-api.native.plist\n\ttype = LaunchAgent\n\tstate = running\n\n\tprogram = /Users/chuanmingliu/responsible-api/.runtime/native-venv/bin/vllm\n\targuments = {\n\t\t/Users/chuanmingliu/responsible-api/.runtime/native-venv/bin/vllm\n\t\tserve\n\t\t/Users/chuanmingliu/.docker/models/bundles/sha256/4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc/model\n\t\t--host\n\t\t127.0.0.1\n\t\t--port\n\t\t18001\n\t\t--served-model-name\n\t\thuggingface.co/mlx-community/qwen3-0.6b-4bit:latest\n\t\t--max-model-len\n\t\t4096\n\t\t--max-num-seqs\n\t\t1\n\t\t--gpu-memory-utilization\n\t\t0.05\n\t\t--default-chat-template-kwargs\n\t\t{\"enable_thinking\":false}\n\t}\n\n\tworking directory = /Users/chuanmingliu/responsible-api\n\n\tstdout path = /Users/chuanmingliu/responsible-api/.runtime/native-engine.log\n\tstderr path = /Users/chuanmingliu/responsible-api/.runtime/native-engine.err.log\n\tinherited environment = {\n\t\tSSH_AUTH_SOCK => /var/run/com.apple.launchd.xAiju5ZGaK/Listeners\n\t}\n\n\tdefault environment = {\n\t\tPATH => /usr/bin:/bin:/usr/sbin:/sbin\n\t}\n\n\tenvironment = {\n\t\tOSLogRateLimit => 64\n\t\tHF_HOME => /Users/chuanmingliu/responsible-api/.runtime/hf-cache\n\t\tPYTHONUNBUFFERED => 1\n\t\tPATH => /Users/chuanmingliu/responsible-api/.runtime/native-venv/bin:/usr/bin:/bin:/usr/sbin:/sbin\n\t\tVLLM_CACHE_ROOT => /Users/chuanmingliu/responsible-api/.runtime/vllm-cache\n\t\tHF_HUB_OFFLINE => 1\n\t\tXPC_SERVICE_NAME => local.responsible-api.native\n\t}\n\n\tdomain = gui/501 [100016]\n\tasid = 100016\n\tminimum runtime = 15\n\texit timeout = 5\n\truns = 1\n\tpid = 62823\n\timmediate reason = speculative\n\tforks = 5\n\texecs = 2\n\tinitialized = 1\n\ttrampolined = 1\n\tstarted suspended = 0\n\tproxy started suspended = 0\n\tchecked allocations = 0 (queried = 1)\n\tchecked allocations reason = no host\n\tchecked allocations flags = 0x0\n\tlast exit code = (never exited)\n\n\tresource coalition = {\n\t\tID = 495096\n\t\ttype = resource\n\t\tstate = active\n\t\tactive count = 1\n\t\tname = local.responsible-api.native\n\t}\n\n\tjetsam coalition = {\n\t\tID = 495097\n\t\ttype = jetsam\n\t\tstate = active\n\t\tactive count = 1\n\t\tname = local.responsible-api.native\n\t}\n\n\tspawn type = daemon (3)\n\tjetsam priority = 40\n\tjetsam memory limit (active) = (unlimited)\n\tjetsam memory limit (inactive) = (unlimited)\n\tjetsamproperties category = daemon\n\tjetsam thread limit = 32\n\tcpumon = default\n\n\tproperties = keepalive | runatload | inferred program\n}",
+    "error": ""
+  }
+}

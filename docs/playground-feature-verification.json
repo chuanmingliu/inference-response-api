@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-10-22T14:23:06.693763+00:00",
+  "url": "http://localhost:8088/",
+  "selected_service": "sglang",
+  "checks": {
+    "context_label": "32,768 tokens, shared with input",
+    "stored_conversation": true,
+    "followup_sent_only_new_input_with_previous_response_id": true,
+    "followup_answer": "ORCHID",
+    "cached_input_tokens": 23,
+    "input_tokens": 69,
+    "response_id_visible": true,
+    "background_create": true,
+    "stop_cancels_native_response": true,
+    "cancelled_response_id": "resp_0db1fd28d2274191afae8ecfff8ac45a",
+    "native_retrieve_status": "cancelled"
+  },
+  "screenshot": "responses-features-playground.png"
+}

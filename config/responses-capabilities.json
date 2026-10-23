@@ -1,0 +1,181 @@
+{
+  "contract": "responses-core-2026-10-23",
+  "source": "https://chatgpt.com/space/page_d2ab672234848191b663c82d3b17b1b7",
+  "scope": "Core implementation with basic transient WebSocket continuation; not full OpenAI parity",
+  "owner": "Responsible API service",
+  "routes": {
+    "POST /v1/responses": "JSON or SSE",
+    "WebSocket /v1/responses": "response.create, single default lane, explicit previous_response_id",
+    "GET /api/capabilities": "service extension"
+  },
+  "request_fields": [
+    "model",
+    "input",
+    "instructions",
+    "store",
+    "stream",
+    "background",
+    "previous_response_id",
+    "tools",
+    "tool_choice",
+    "parallel_tool_calls",
+    "text",
+    "temperature",
+    "top_p",
+    "max_output_tokens",
+    "metadata",
+    "reasoning",
+    "include",
+    "stream_options",
+    "truncation"
+  ],
+  "defaults": {
+    "store": "must be explicitly false; omitted/null/true reject instead of downgrading storage",
+    "background": false,
+    "stream": false,
+    "temperature": 1,
+    "top_p": 1,
+    "max_output_tokens": 1024,
+    "parallel_tool_calls": true,
+    "tool_choice": "auto",
+    "truncation": "disabled",
+    "stream_options.include_obfuscation": true
+  },
+  "input_items": [
+    "message",
+    "function_call",
+    "function_call_output"
+  ],
+  "message_roles": [
+    "system",
+    "developer",
+    "user",
+    "assistant"
+  ],
+  "content_parts": [
+    "input_text",
+    "output_text",
+    "refusal"
+  ],
+  "output_items": [
+    "message",
+    "function_call"
+  ],
+  "tool_choices": [
+    "none",
+    "auto",
+    "required",
+    "function",
+    "allowed_tools"
+  ],
+  "text_formats": [
+    "text",
+    "json_object",
+    "json_schema"
+  ],
+  "schema_keywords": [
+    "type",
+    "properties",
+    "required",
+    "additionalProperties",
+    "items",
+    "enum",
+    "const",
+    "anyOf",
+    "title",
+    "description"
+  ],
+  "schema_limits": {
+    "bytes": 65536,
+    "depth": 20,
+    "nodes": 1000
+  },
+  "events": [
+    "response.created",
+    "response.in_progress",
+    "response.output_item.added",
+    "response.content_part.added",
+    "response.output_text.delta",
+    "response.output_text.done",
+    "response.refusal.delta",
+    "response.refusal.done",
+    "response.function_call_arguments.delta",
+    "response.function_call_arguments.done",
+    "response.content_part.done",
+    "response.output_item.done",
+    "response.completed",
+    "response.incomplete",
+    "response.failed"
+  ],
+  "retention": {
+    "responses": "not retained; no HTTP retrieve or server-side HTTP chaining",
+    "websocket": "latest context in connection memory, evicted on close/failure/budget limit; replay after reconnect",
+    "engine_caches": "engine-owned KV/prefix caches; store:false is not a zero-data-retention promise",
+    "telemetry": "request/response IDs, timing, status and measured token usage; no prompt/output/tool arguments"
+  },
+  "unsupported": [
+    "retained_response_lifecycle",
+    "background",
+    "conversations",
+    "input_tokens_public_route",
+    "compaction",
+    "assistant_phase",
+    "reasoning_items",
+    "encrypted_reasoning",
+    "images",
+    "files",
+    "audio",
+    "hosted_tools",
+    "custom_grammar",
+    "MCP",
+    "stream_id",
+    "steering",
+    "warmup",
+    "automatic_truncation",
+    "logprobs",
+    "nonempty_annotations",
+    "cloud_service_tiers"
+  ],
+  "deviations": [
+    "Explicit store:false required for all Core requests, including WebSocket.",
+    "Local default output budget is 1024 tokens and is echoed; official service defaults are not assumed.",
+    "Usage detail objects are omitted when the engine does not measure/report them; no invented reasoning/cache counts.",
+    "Assistant phase cannot be represented faithfully by these model/template profiles and rejects before inference.",
+    "Schema support is the bounded listed subset; refs, recursion and unlisted constraints reject before inference.",
+    "Structured text formats cannot be combined with active function tools in one request; this combination rejects before tokenization/inference.",
+    "API keys are optional only for local development; configure API_KEY or API_KEYS to require Bearer authentication."
+  ],
+  "evidence": {
+    "unit": [
+      "tests/responses-validation.test.mjs",
+      "tests/responses-engine.test.mjs",
+      "tests/responses-core.test.mjs"
+    ],
+    "transport": [
+      "tests/responses-http.test.mjs",
+      "tests/responses-websocket.test.mjs"
+    ],
+    "sdk": [
+      "tests/responses-sdk.test.mjs",
+      "scripts/check-core-sdk.py",
+      "scripts/sdk-go/main.go",
+      "docs/core-sdk-vllm-metal.json",
+      "docs/core-sdk-sglang-metal.json",
+      "docs/core-sdk-go-vllm-metal.json",
+      "docs/core-sdk-go-sglang-metal.json"
+    ],
+    "metal": [
+      "docs/core-vllm-metal.json",
+      "docs/core-sglang-metal.json",
+      "docs/core-metal-evidence.json"
+    ],
+    "cuda": "not run; separate real-hardware gate",
+    "official_wire_differential": "not run; source-derived fixtures and SDK helpers are not official wire certification",
+    "production": "not certified: soak/load, crash/rolling restart and full release gates remain separate",
+    "release_gates": {
+      "I02_assistant_phase": "unsupported by admitted model/template profiles; P0 gap",
+      "M05_live_engine_crash_restart": "not run; client disconnect/reconnect tests are separate evidence",
+      "M06_unified_memory_pressure": "not run; model loaded and live inference alone are insufficient"
+    }
+  }
+}

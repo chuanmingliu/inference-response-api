@@ -1,0 +1,20 @@
+{
+  "name": "local-qwen-playground",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Responses and chat playground for Docker Model Runner, vLLM Metal, and SGLang MLX",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "ws": "8.22.0"
+  },
+  "devDependencies": {
+    "openai": "7.43.0"
+  }
+}

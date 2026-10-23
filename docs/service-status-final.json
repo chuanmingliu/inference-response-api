@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-22T13:49:05.754950+00:00",
+  "services": [
+    {
+      "service_id": "docker",
+      "base_url": "http://127.0.0.1:8088",
+      "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+      "ready": true,
+      "generation_ok": true,
+      "output_text": "ready"
+    },
+    {
+      "service_id": "native",
+      "base_url": "http://127.0.0.1:8089",
+      "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+      "ready": true,
+      "generation_ok": true,
+      "output_text": "ready"
+    },
+    {
+      "service_id": "sglang",
+      "base_url": "http://127.0.0.1:8090",
+      "backend": "SGLang 0.5.22 / MLX 0.32.2",
+      "ready": true,
+      "generation_ok": true,
+      "output_text": "ready"
+    }
+  ],
+  "sglang_guide_current": true
+}

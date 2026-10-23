@@ -1,0 +1,110 @@
+{
+  "checked_at": "2026-10-22T04:53:38.641Z",
+  "base_url": "http://127.0.0.1:8088",
+  "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+  "backend": "vllm-metal",
+  "responses_mode": "adapter",
+  "checks": [
+    {
+      "name": "API health",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 5,
+      "service": "local-qwen-playground",
+      "started_at": "2026-10-22T04:53:25.592Z"
+    },
+    {
+      "name": "Model catalog readiness",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 24,
+      "api_reachable": true,
+      "selected_model_present": true,
+      "ready": true,
+      "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+      "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+      "service_name": "Docker Model Runner",
+      "backend_verified": false,
+      "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+      "checked_at": "2026-10-22T04:53:38.280Z",
+      "availability_scope": "model_catalog",
+      "models": [
+        "docker.io/ai/gpt-oss:20B-UD-Q4_K_XL",
+        "huggingface.co/mlx-community/qwen3-asr-0.6b-4bit:latest",
+        "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest"
+      ],
+      "inference": {
+        "verified": false,
+        "note": "This check reads the model catalog only. Docker Model Runner may list models from all backends; run a generation request to verify vLLM Metal inference."
+      },
+      "upstream_status": 200
+    },
+    {
+      "name": "Chat completions JSON",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 75,
+      "text": "The capital of France is Paris.",
+      "usage": {
+        "prompt_tokens": 29,
+        "total_tokens": 37,
+        "completion_tokens": 8,
+        "prompt_tokens_details": null
+      }
+    },
+    {
+      "name": "Responses JSON",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 48,
+      "text": "The capital of France is Paris.",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 29,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 8,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 37
+      }
+    },
+    {
+      "name": "Chat completions SSE",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 62,
+      "events": 10,
+      "text": "The capital of France is Paris."
+    },
+    {
+      "name": "Responses SSE",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 45,
+      "events": 15,
+      "text": "The capital of France is Paris."
+    },
+    {
+      "name": "Responses multi-turn",
+      "ok": true,
+      "http_status": 200,
+      "elapsed_ms": 106,
+      "text": "Hello! I'm Mira. If you have any questions or need help, feel free to ask! 😊",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 41,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 65
+      }
+    }
+  ]
+}

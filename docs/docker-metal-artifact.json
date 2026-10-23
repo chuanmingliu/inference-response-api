@@ -1,0 +1,33 @@
+{
+  "verified_at": "2026-10-22T14:23:11.947180+00:00",
+  "status": "downloaded_verified_not_installed",
+  "repository": "docker/model-runner",
+  "tag": "vllm-metal-v0.2.0-20260420-142150",
+  "platform": "darwin/arm64",
+  "source_index_digest": "sha256:c00a5b99f4c688565b370efa9795e4239682add876ed9901f8df4b1241728eca",
+  "source_index_size": 856,
+  "manifest_digest": "sha256:ea55261a8d30d0a578643eff9f1638935ec8370b334a499aaa12916eef954a83",
+  "manifest_size": 482,
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "digest": "sha256:d8bd5aec596f1bc4af8d0a9dcb3cb5e4c9eb4ed14756df82a1493d1dd3f3299a",
+    "size": 487
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:525d8d0c1c7e2a89d409a2e54c8a203ac12b266e351bbce9040e3d822c833578",
+      "size": 382894603
+    }
+  ],
+  "downloaded_blob_count": 4,
+  "downloaded_bytes": 382896428,
+  "oci_layout_path": "/Users/chuanmingliu/responsible-api/.runtime/artifacts/vllm-metal-v0.2.0-20260420-142150",
+  "verification": "SHA-256 and manifest-declared size verified for every selected config/layer blob; source index and platform manifest verified against pinned digests.",
+  "live_installation_changed": false,
+  "source_urls": [
+    "https://hub.docker.com/r/docker/model-runner/tags?name=vllm-metal",
+    "https://github.com/docker/model-runner/blob/v1.2.9/pkg/inference/backends/vllm/vllm_metal.go",
+    "https://www.docker.com/blog/docker-model-runner-vllm-metal-macos/"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-10-22T14:17:09.788463+00:00",
+  "base_url": "http://127.0.0.1:8090/v1",
+  "sdk": "3.36.1",
+  "checks": [
+    {
+      "name": "Responses JSON",
+      "ok": true,
+      "output": "ready"
+    },
+    {
+      "name": "SDK streaming accumulation",
+      "ok": true,
+      "output": "ready",
+      "delta_count": 1
+    },
+    {
+      "name": "Stateless response is not retained",
+      "ok": true
+    },
+    {
+      "name": "Stored retrieval and continuation",
+      "ok": true,
+      "response_id": "resp_90179ad5bb8d4000b643f92b456c1312",
+      "child_id": "resp_c792dbb81b5b4590a22656fbded9ec5c",
+      "continuation": "The test label is ORCHID.",
+      "metadata_round_trip": true
+    },
+    {
+      "name": "Prefix reuse and cache-key isolation",
+      "ok": true,
+      "runs": [
+        {
+          "input_tokens": 3124,
+          "cached_tokens": 0,
+          "elapsed_seconds": 0.8947
+        },
+        {
+          "input_tokens": 3124,
+          "cached_tokens": 3114,
+          "elapsed_seconds": 0.5658
+        },
+        {
+          "input_tokens": 3124,
+          "cached_tokens": 0,
+          "elapsed_seconds": 0.8823
+        }
+      ]
+    },
+    {
+      "name": "JSON schema constrained output",
+      "ok": true,
+      "output": {
+        "city": "Paris",
+        "ready": true
+      }
+    },
+    {
+      "name": "Function call and tool-result continuation",
+      "ok": true,
+      "function_name": "get_test_value",
+      "arguments": {
+        "key": "sample"
+      },
+      "output": "The value returned by `get_test_value` for the key \"sample\" is 42."
+    },
+    {
+      "name": "Background completion and polling",
+      "ok": true,
+      "states": [
+        "queued",
+        "completed"
+      ],
+      "output": "ready"
+    },
+    {
+      "name": "Background cancellation",
+      "ok": true,
+      "status": "cancelled"
+    },
+    {
+      "name": "Active job admission limit",
+      "ok": true,
+      "admitted": 8,
+      "overflow_status": 429
+    },
+    {
+      "name": "Unsupported cloud cache controls and hosted tools return 400",
+      "ok": true
+    }
+  ]
+}

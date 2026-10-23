@@ -1,0 +1,140 @@
+{
+  "checked_at": "2026-10-22T04:58:30.675Z",
+  "note": "Three sequential warm-cache samples per service after one warm-up. Same model and chat settings; runtime versions differ. Local smoke comparison, not an isolated engine benchmark. Throughput uses full request wall time.",
+  "prompt": "Explain how a rain cloud forms in about 80 words. Use plain language. /no_think",
+  "results": [
+    {
+      "name": "Docker Model Runner",
+      "url": "http://127.0.0.1:8088",
+      "samples": [
+        {
+          "round": 0,
+          "elapsed_ms": 369,
+          "first_token_ms": 33,
+          "output_tokens": 101,
+          "tokens_per_second_wall_clock": 273.5,
+          "text": "A rain cloud forms when the air near the surface is warm enough to start condensing water vapor into clouds. As the warm air rises, it cools and the water vapor condenses into droplets, forming a cloud. This process continues until the cloud is large enough to hold rain, and the water begins to fall as rain. The formation of a rain cloud is primarily due to the presence of warm, moist air near the surface, which allows for the condensation of water vapor into clouds."
+        },
+        {
+          "round": 1,
+          "elapsed_ms": 373,
+          "first_token_ms": 31,
+          "output_tokens": 101,
+          "tokens_per_second_wall_clock": 270.8,
+          "text": "A rain cloud forms when the air near the surface is warm enough to start condensing water vapor into clouds. As the warm air rises, it cools and the water vapor condenses into droplets, forming a cloud. This process continues until the cloud is large enough to hold rain, and the water begins to fall as rain. The formation of a rain cloud is primarily due to the presence of warm, moist air near the surface, which allows for the condensation of water vapor into clouds."
+        },
+        {
+          "round": 2,
+          "elapsed_ms": 366,
+          "first_token_ms": 28,
+          "output_tokens": 101,
+          "tokens_per_second_wall_clock": 276.2,
+          "text": "A rain cloud forms when the air near the surface is warm enough to start condensing water vapor into clouds. As the warm air rises, it cools and the water vapor condenses into droplets, forming a cloud. This process continues until the cloud is large enough to hold rain, and the water begins to fall as rain. The formation of a rain cloud is primarily due to the presence of warm, moist air near the surface, which allows for the condensation of water vapor into clouds."
+        }
+      ],
+      "config": {
+        "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+        "backend": "vllm-metal 0.1.0 / vLLM 0.13.0",
+        "service_name": "Docker Model Runner",
+        "context_length": 4096,
+        "upstream": "http://model-runner.docker.internal/engines/vllm-metal/v1",
+        "responses_mode": "adapter",
+        "responses_capabilities": {
+          "text": true,
+          "streaming": true,
+          "stateless": true,
+          "tools": false,
+          "images": false,
+          "persistence": false,
+          "background": false
+        },
+        "endpoints": {
+          "responses": "/v1/responses",
+          "chat_completions": "/v1/chat/completions",
+          "models": "/v1/models"
+        },
+        "deployment_doc": "/docs",
+        "comparison": {
+          "available": true,
+          "services": [
+            {
+              "id": "docker",
+              "name": "Docker Model Runner",
+              "base_path": ""
+            },
+            {
+              "id": "native",
+              "name": "Native vLLM Metal",
+              "base_path": "/compare/native"
+            }
+          ]
+        }
+      },
+      "average": {
+        "elapsed_ms": 369.3,
+        "first_token_ms": 30.7,
+        "tokens_per_second_wall_clock": 273.5
+      }
+    },
+    {
+      "name": "Native vLLM Metal",
+      "url": "http://127.0.0.1:8089",
+      "samples": [
+        {
+          "round": 0,
+          "elapsed_ms": 410,
+          "first_token_ms": 56,
+          "output_tokens": 94,
+          "tokens_per_second_wall_clock": 229.2,
+          "text": "A rain cloud forms when the air near the surface is warm enough to start condensing water vapor into clouds. As the warm air rises, it cools and the water vapor condenses into droplets, forming a cloud. This process continues until the cloud is large enough to hold raindrops, and the cloud begins to gather rainwater. The cloud then starts to drop rain, and the process repeats as the cloud continues to grow and the rain begins to fall."
+        },
+        {
+          "round": 1,
+          "elapsed_ms": 404,
+          "first_token_ms": 38,
+          "output_tokens": 94,
+          "tokens_per_second_wall_clock": 232.5,
+          "text": "A rain cloud forms when the air near the surface is warm enough to start condensing water vapor into clouds. As the warm air rises, it cools and the water vapor condenses into droplets, forming a cloud. This process continues until the cloud is large enough to hold raindrops, and the cloud begins to gather rainwater. The cloud then starts to drop rain, and the process repeats as the cloud continues to grow and the rain begins to fall."
+        },
+        {
+          "round": 2,
+          "elapsed_ms": 396,
+          "first_token_ms": 38,
+          "output_tokens": 94,
+          "tokens_per_second_wall_clock": 237.2,
+          "text": "A rain cloud forms when the air near the surface is warm enough to start condensing water vapor into clouds. As the warm air rises, it cools and the water vapor condenses into droplets, forming a cloud. This process continues until the cloud is large enough to hold raindrops, and the cloud begins to gather rainwater. The cloud then starts to drop rain, and the process repeats as the cloud continues to grow and the rain begins to fall."
+        }
+      ],
+      "config": {
+        "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+        "backend": "vllm-metal 0.32.0 / vLLM 0.32.0",
+        "service_name": "Native vLLM Metal",
+        "context_length": 4096,
+        "upstream": "http://host.docker.internal:18001/v1",
+        "responses_mode": "native",
+        "responses_capabilities": null,
+        "endpoints": {
+          "responses": "/v1/responses",
+          "chat_completions": "/v1/chat/completions",
+          "models": "/v1/models"
+        },
+        "deployment_doc": "/docs",
+        "comparison": {
+          "available": false,
+          "services": [
+            {
+              "id": "docker",
+              "name": "Docker Model Runner",
+              "base_path": ""
+            }
+          ]
+        }
+      },
+      "average": {
+        "elapsed_ms": 403.3,
+        "first_token_ms": 44,
+        "tokens_per_second_wall_clock": 233
+      }
+    }
+  ]
+}

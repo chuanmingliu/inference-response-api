@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-10-22T12:33:31.976449+00:00",
+  "note": "Follow-up service check after benchmark completion; not a contemporaneous thermal or performance sample.",
+  "containers": {
+    "exit_code": 1,
+    "output": "",
+    "error": "Cannot connect to the Docker daemon at unix:///Users/chuanmingliu/.docker/run/docker.sock. Is the docker daemon running?"
+  },
+  "models": {
+    "exit_code": 1,
+    "output": "",
+    "error": "unable to initialize standalone model runner: unable to identify existing standalone model runner: unable to prune stopped model runner containers: unable to identify model runner containers: Cannot connect to the Docker daemon at unix:///Users/chuanmingliu/.docker/run/docker.sock. Is the docker daemon running?"
+  },
+  "native": {
+    "exit_code": 0,
+    "output": "{\n\t\"StandardOutPath\" = \"/Users/chuanmingliu/responsible-api/.runtime/native-engine.log\";\n\t\"LimitLoadToSessionType\" = \"Aqua\";\n\t\"StandardErrorPath\" = \"/Users/chuanmingliu/responsible-api/.runtime/native-engine.err.log\";\n\t\"Label\" = \"local.responsible-api.native\";\n\t\"OnDemand\" = false;\n\t\"LastExitStatus\" = 0;\n\t\"PID\" = 2655;\n\t\"Program\" = \"/Users/chuanmingliu/responsible-api/.runtime/native-venv/bin/vllm\";\n\t\"ProgramArguments\" = (\n\t\t\"/Users/chuanmingliu/responsible-api/.runtime/native-venv/bin/vllm\";\n\t\t\"serve\";\n\t\t\"/Users/chuanmingliu/.docker/models/bundles/sha256/4c871aaa1be2f0b14156553622c2fed6f62a4a0f1b9df3832cab5fac533cffcc/model\";\n\t\t\"--host\";\n\t\t\"127.0.0.1\";\n\t\t\"--port\";\n\t\t\"18001\";\n\t\t\"--served-model-name\";\n\t\t\"huggingface.co/mlx-community/qwen3-0.6b-4bit:latest\";\n\t\t\"--max-model-len\";\n\t\t\"4096\";\n\t\t\"--max-num-seqs\";\n\t\t\"1\";\n\t\t\"--gpu-memory-utilization\";\n\t\t\"0.05\";\n\t\t\"--default-chat-template-kwargs\";\n\t\t\"{\"enable_thinking\":false}\";\n\t);\n};",
+    "error": ""
+  },
+  "8088": {
+    "error": "<urlopen error [Errno 61] Connection refused>"
+  },
+  "8089": {
+    "error": "<urlopen error [Errno 61] Connection refused>"
+  }
+}

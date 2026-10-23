@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-22T13:47:19.942496+00:00",
+  "restart_command_succeeded": true,
+  "launchagent_running": true,
+  "mlx_sampling_flag_present": true,
+  "ready": true,
+  "response_status": "completed",
+  "output_text": "ready",
+  "ui_check": {
+    "url": "http://localhost:8088/",
+    "selected_service": "SGLang MLX",
+    "native_responses_stream_completed": true,
+    "screenshot": "sglang-playground.png"
+  }
+}

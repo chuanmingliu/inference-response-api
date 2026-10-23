@@ -1,0 +1,12 @@
+.env
+.runtime/
+node_modules/
+.DS_Store
+*.log
+__pycache__/
+
+# Local environment and task artifacts
+.env.*
+!.env.example
+.planning/
+.zshrc

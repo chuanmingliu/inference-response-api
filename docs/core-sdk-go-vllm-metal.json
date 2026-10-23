@@ -1,0 +1,27 @@
+{
+  "base_url": "http://127.0.0.1:8089/v1",
+  "checks": [
+    {
+      "name": "json_create",
+      "passed": true,
+      "response_id": "resp_7161852a8c54462c848b832ef9f2de96",
+      "status": "completed",
+      "output_bytes": 34,
+      "duration_seconds": 0.254594542
+    },
+    {
+      "name": "sse_stream",
+      "passed": true,
+      "response_id": "resp_9dbf6dfc7a7c43a59395b617e2e88392",
+      "status": "completed",
+      "output_bytes": 92,
+      "delta_count": 18,
+      "duration_seconds": 0.1443465
+    }
+  ],
+  "evidence": "official SDK create/stream with semantic assertions; not full conformance",
+  "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+  "passed": true,
+  "recorded_at": "2026-10-23T05:59:33Z",
+  "sdk": "github.com/openai/openai-go/v3 v3.86.0"
+}

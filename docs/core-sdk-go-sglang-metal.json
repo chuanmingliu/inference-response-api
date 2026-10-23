@@ -1,0 +1,27 @@
+{
+  "base_url": "http://127.0.0.1:18102/v1",
+  "checks": [
+    {
+      "name": "json_create",
+      "passed": true,
+      "response_id": "resp_10fe053764d642a3a67f7be04b387b1c",
+      "status": "completed",
+      "output_bytes": 36,
+      "duration_seconds": 0.138868708
+    },
+    {
+      "name": "sse_stream",
+      "passed": true,
+      "response_id": "resp_976a098d330b4eb7b56ebde383af8aaf",
+      "status": "completed",
+      "output_bytes": 34,
+      "delta_count": 10,
+      "duration_seconds": 0.043457708
+    }
+  ],
+  "evidence": "official SDK create/stream with semantic assertions; not full conformance",
+  "model": "mlx-community/Qwen3-0.6B-4bit",
+  "passed": true,
+  "recorded_at": "2026-10-23T05:54:32Z",
+  "sdk": "github.com/openai/openai-go/v3 v3.86.0"
+}
