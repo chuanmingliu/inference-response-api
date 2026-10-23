@@ -1,5 +1,5 @@
 {
-  "name": "local-qwen-playground",
+  "name": "inference-response-api",
   "version": "1.0.0",
   "private": true,
   "type": "module",

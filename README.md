@@ -1,4 +1,4 @@
-# Responsible API · local Qwen playground
+# Response API · local Qwen playground
 
 A service-owned Responses API for vLLM and SGLang, with a local Qwen3-0.6B playground. The new Core profile supports JSON/SSE, typed text Items, functions, constrained JSON, exact token admission and transient WebSocket continuation. Requests require `store:false`. Read the [Core guide and limitations](docs/RESPONSES-CORE.md) and [capability manifest](config/responses-capabilities.json). Retained responses, background jobs and advanced features remain separate release gates.
 

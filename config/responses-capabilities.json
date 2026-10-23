@@ -2,7 +2,7 @@
   "contract": "responses-core-2026-10-23",
   "source": "https://chatgpt.com/space/page_d2ab672234848191b663c82d3b17b1b7",
   "scope": "Core implementation with basic transient WebSocket continuation; not full OpenAI parity",
-  "owner": "Responsible API service",
+  "owner": "Response API service",
   "routes": {
     "POST /v1/responses": "JSON or SSE",
     "WebSocket /v1/responses": "response.create, single default lane, explicit previous_response_id",

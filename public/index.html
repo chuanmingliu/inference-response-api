@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7f2">
-  <title>Responsible · Local model playground</title>
+  <title>Response API · Local model playground</title>
   <link rel="stylesheet" href="/styles.css">
   <script src="/app.js" defer></script>
 </head>
@@ -25,7 +25,7 @@
   </svg>
 
   <aside class="sidebar" aria-label="Main navigation">
-    <a class="brand" href="/" aria-label="Responsible home"><span class="brand-mark"><span></span><span></span><span></span></span><span>responsible<span class="brand-dot">.</span></span></a>
+    <a class="brand" href="/" aria-label="Response API home"><span class="brand-mark"><span></span><span></span><span></span></span><span>response api<span class="brand-dot">.</span></span></a>
     <div class="workspace-label"><span class="tiny-square"></span> LOCAL WORKSPACE <span class="workspace-key">01</span></div>
     <nav>
       <button class="nav-item active" id="nav-playground" aria-current="page"><svg><use href="#i-grid"/></svg>Playground<span class="nav-active-dot"></span></button>
@@ -85,7 +85,7 @@
           <p class="status-footnote" id="status-footnote">Checking local service availability.</p>
         </aside>
       </div>
-      <footer class="page-footer"><span>RESPONSIBLE <span class="footer-slash">/</span> LOCAL INFERENCE LAB</span><span>Designed for a smaller footprint.</span></footer>
+      <footer class="page-footer"><span>RESPONSE API <span class="footer-slash">/</span> LOCAL INFERENCE LAB</span><span>Designed for a smaller footprint.</span></footer>
     </section>
 
     <section id="api-view" class="page-view" hidden><div class="page-heading"><div><div class="eyebrow">FROM PLAYGROUND TO PRODUCT</div><h1>One model. Two APIs<span>.</span></h1><p>Use familiar endpoints with your local inference service.</p></div></div><div class="api-intro"><span class="local-label"><span></span> YOUR LOCAL BASE URL</span><code id="api-base-url"></code><p>Requests are forwarded to the model runner. Keep this development service on your Mac.</p></div><div class="api-examples"><section class="api-example"><div class="settings-heading"><div><h2 id="responses-example-title">Responses API · adapter</h2><p id="responses-example-description">Text-only compatibility adapter. Send full history with store: false.</p></div><button class="text-button" id="copy-response-example"><svg><use href="#i-copy"/></svg>Copy</button></div><pre id="responses-example"></pre></section><section class="api-example"><div class="settings-heading"><div><h2>Chat Completions</h2><p>A familiar conversation with role-based messages.</p></div><button class="text-button" id="copy-chat-example"><svg><use href="#i-copy"/></svg>Copy</button></div><pre id="chat-example"></pre></section></div><div class="api-note"><svg><use href="#i-server"/></svg><div><h2>Understand your deployment</h2><p>Find setup steps, service commands, limitations, and verification results in the deployment guide.</p></div><a class="button-link" href="/docs" data-deployment-doc target="_blank" rel="noopener">Read the guide <svg><use href="#i-arrow"/></svg></a></div></section>
