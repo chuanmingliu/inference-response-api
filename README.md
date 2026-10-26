@@ -19,6 +19,7 @@ A service-owned Responses API for vLLM and SGLang, with a local Qwen3-0.6B playg
 - Live status: <http://localhost:8088/api/status>
 - Historical integration snapshots: [Docker](docs/service-status.json), [native vLLM](docs/service-status-native.json), [SGLang](docs/service-status-sglang.json)
 - Benchmark report: [results and methodology](docs/benchmarks/2026-10-22-qwen3-comparison/REPORT.md) · [visual report](docs/benchmarks/2026-10-22-qwen3-comparison/report.html)
+- WebSocket state reuse: [gateway overhead measurements](docs/benchmarks/2026-10-26-websocket-state-reuse/REPORT.md) with deterministic engine fixtures.
 - Earlier three-sample smoke timing: [docs/comparison.json](docs/comparison.json)
 
 ```sh

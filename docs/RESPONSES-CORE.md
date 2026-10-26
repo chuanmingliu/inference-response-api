@@ -59,11 +59,15 @@ One default lane runs FIFO. A create without a parent starts fresh. Only the lat
 
 Defaults: 8 queued creates; 1 MiB frame, queued-byte, outbound and cached-context limits; 64 connections globally/8 per tenant; 30-second heartbeat/write timeout; 5-minute idle timeout; 60-minute maximum connection lifetime. Disconnect abandons queued work and aborts active inference. Named lanes, steering, warmup and retained reconnect recovery are rejected.
 
+Continuation now reuses deeply immutable history, previously normalized Items and cached byte counts. Each generation compiles one request snapshot shared by exact token admission and inference. This follows the reusable-state approach in [OpenAI's WebSocket article](https://openai.com/index/speeding-up-agentic-workflows-with-websockets/). Full tool-result correlation and exact token admission remain enforced; the native engine still receives the complete prompt. Keep the socket open across tool turns and send only new Items with the latest `previous_response_id`; supply the current instructions/tools on every create. See the [measured gateway-overhead report](benchmarks/2026-10-26-websocket-state-reuse/REPORT.md) for the implementation, benchmark and its limits.
+
 ## Authentication and operations
 
 Set `API_KEY` for one tenant or `API_KEYS='{"key-a":"tenant-a","key-b":"tenant-b"}'` for explicit tenant identities. Both HTTP and WebSocket enforce Bearer authentication when configured; socket identity is rechecked before each create. Without keys the mode is explicitly `local-development`; keep the listener on loopback. Browser playground credential entry is not implemented, so authenticated deployments should use an SDK or API client. For a standalone gateway, engine credentials use `UPSTREAM_API_KEY`. Compose uses `DMR_UPSTREAM_API_KEY`, `NATIVE_UPSTREAM_API_KEY`, and `SGLANG_UPSTREAM_API_KEY` for the respective services; client keys are not forwarded to the engine in service mode.
 
 Bodies and complete continuation history are bounded to 1 MiB by default. Generation admission is 4 global/2 per tenant, with 429 and Retry-After on saturation. Request IDs are returned even for rejected requests. Logs contain IDs, status, timings and usage, never prompts, outputs, arguments or credentials. `store:false` does not disable engine KV/prefix caches and does not claim OpenAI ZDR.
+
+`response_finished` includes `engine_preparation_ms` (request compilation/snapshot), `token_admission_ms` (successful tokenizer round trip), `ttft_ms` and `duration_ms`. The first two retain microsecond precision in milliseconds; null indicates a phase did not complete. Pre-run API validation is outside these timings.
 
 Retained retrieve/delete/input-items, background/cancel/resume, Conversations, compaction, multimodal content, encrypted reasoning, custom grammar and hosted/MCP tools have no implementation in this profile. They return explicit errors. The old native SGLang background/storage features remain an independent experimental mode, not a service-owned stateful release.
 
@@ -81,6 +85,10 @@ Run Metal engines sequentially and release one model before starting the next. P
 
 ### Recorded local results · 23 October 2026
 
-The current suite passed 142 JavaScript tests and 21 Python tests. Both [vLLM Metal](core-vllm-metal.json) and [SGLang Metal](core-sglang-metal.json) passed 15 live checks through the Docker gateways, including adversarial strict functions, JSON schema, SSE reconstruction, HTTP abort recovery and WebSocket full-history replay. [Accelerator evidence](core-metal-evidence.json) records the runtime versions, template/tokenizer pins and observed Metal/MLX startup. Python SDK workflows passed on both engines; Go JSON/SSE smoke passed on both; Node SDK helper/stream/WebSocket workflows use deterministic fixtures.
+At that revision, the suite passed 142 JavaScript tests and 21 Python tests. Both [vLLM Metal](core-vllm-metal.json) and [SGLang Metal](core-sglang-metal.json) passed 15 live checks through the Docker gateways, including adversarial strict functions, JSON schema, SSE reconstruction, HTTP abort recovery and WebSocket full-history replay. [Accelerator evidence](core-metal-evidence.json) records the runtime versions, template/tokenizer pins and observed Metal/MLX startup. Python SDK workflows passed on both engines; Go JSON/SSE smoke passed on both; Node SDK helper/stream/WebSocket workflows use deterministic fixtures.
 
 These results do not close every first-release gate in the design. Assistant phase (I02) is rejected by these model profiles. Live process kill/restart under load (M05), measured unified-memory pressure (M06), official OpenAI wire comparisons and CUDA hardware acceptance remain pending. Client-observed recovery timings do not measure engine cancellation latency. Retained/background and advanced profiles remain later implementation milestones.
+
+### WebSocket state reuse · 26 October 2026
+
+All 152 JavaScript tests passed after the state-reuse changes. Both modern Mac runtimes passed 15 live Core/WS checks and five official Python SDK workflows each after deployment. The [dated report](benchmarks/2026-10-26-websocket-state-reuse/REPORT.md) includes raw evidence and a gateway-overhead benchmark with simulated inference; it makes no model-latency or additional API-coverage claim.

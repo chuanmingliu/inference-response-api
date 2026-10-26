@@ -431,3 +431,30 @@ test('request byte admission includes continuation history rather than only the 
   const history = [{ type: 'message', role: 'user', content: [{ type: 'input_text', text: 'old'.repeat(1000) }] }];
   assert.throws(() => service.prepare(payload, { transport: 'websocket', history }), (error) => error.status === 413 && error.code === 'request_too_large');
 });
+
+test('service prepares one engine execution and logs separate content-free preparation/admission timings', async () => {
+  let preparations = 0, admissions = 0, generations = 0;
+  const logs = [];
+  const engine = {
+    prepare(request, { history }) {
+      preparations++;
+      assert.equal(request.input[0].content[0].text, 'private prompt');
+      assert.deepEqual(history, []);
+      return {
+        async countInputTokens() { admissions++; return { input_tokens: 3 }; },
+        async *generate() { generations++; yield { type: 'text_delta', delta: 'private answer' }; yield { type: 'finish', reason: 'stop' }; },
+      };
+    },
+    countInputTokens() { assert.fail('must use the prepared execution'); },
+    generate() { assert.fail('must use the prepared execution'); },
+  };
+  const service = new ResponsesService({ model: 'fixture-model', profile, engine, logger: (entry) => logs.push(entry) });
+  const request = service.prepare({ store: false, input: 'private prompt' });
+  const result = await service.run(request);
+  assert.deepEqual([preparations, admissions, generations], [1, 1, 1]);
+  assert.equal(result.response.status, 'completed');
+  assert.ok(Object.isFrozen(result.history));
+  assert.ok(logs[0].engine_preparation_ms >= 0);
+  assert.ok(logs[0].token_admission_ms >= 0);
+  assert.equal(JSON.stringify(logs).includes('private'), false);
+});

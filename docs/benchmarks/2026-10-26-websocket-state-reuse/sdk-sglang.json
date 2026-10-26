@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-26T02:54:57.595907+00:00",
+  "sdk": "openai-python 3.36.1",
+  "base_url": "http://127.0.0.1:8090/v1",
+  "model": "mlx-community/Qwen3-0.6B-4bit",
+  "evidence": "official SDK workflows with semantic assertions; not full conformance",
+  "checks": [
+    {
+      "name": "json_create",
+      "passed": true,
+      "response_id": "resp_370f8301cc9645469690e21fd52409aa",
+      "status": "completed",
+      "output_text": "sea",
+      "duration_seconds": 0.219
+    },
+    {
+      "name": "sse_sdk_helper",
+      "passed": true,
+      "response_id": "resp_d52293d7528f4aa28ffb220a64570b88",
+      "status": "completed",
+      "delta_count": 4,
+      "duration_seconds": 0.103
+    },
+    {
+      "name": "function_roundtrip",
+      "passed": true,
+      "response_id": "resp_01b446492ccb4711b0d9023cf977be60",
+      "item_id": "fc_3228946eb2634ef683ed204f1c2c0a22",
+      "call_id": "call_5495e2c9c11e4fd183100218",
+      "followup_id": "resp_f789556502e3437a99632f75fc3e97b8",
+      "duration_seconds": 0.218
+    },
+    {
+      "name": "pydantic_parse",
+      "passed": true,
+      "response_id": "resp_2e3cae61657c436f819ccbd520e18eed",
+      "parsed": {
+        "city": "Paris"
+      },
+      "duration_seconds": 0.087
+    },
+    {
+      "name": "sdk_websocket_continuation",
+      "passed": true,
+      "first_response_id": "resp_2255162e81c74579b0531f924433c124",
+      "continued_response_id": "resp_95206e98b50c4b3fa8670408dd69b01c",
+      "duration_seconds": 0.136
+    }
+  ],
+  "passed": true
+}

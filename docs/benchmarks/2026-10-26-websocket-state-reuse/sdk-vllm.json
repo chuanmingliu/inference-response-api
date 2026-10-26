@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-26T02:54:40.583853+00:00",
+  "sdk": "openai-python 3.36.1",
+  "base_url": "http://127.0.0.1:8089/v1",
+  "model": "huggingface.co/mlx-community/qwen3-0.6b-4bit:latest",
+  "evidence": "official SDK workflows with semantic assertions; not full conformance",
+  "checks": [
+    {
+      "name": "json_create",
+      "passed": true,
+      "response_id": "resp_81670d65d7b64ff59a39b82c33ceccbd",
+      "status": "completed",
+      "output_text": "প্লান",
+      "duration_seconds": 0.279
+    },
+    {
+      "name": "sse_sdk_helper",
+      "passed": true,
+      "response_id": "resp_c09196edc92b4d69baa0cf1a7d9d0083",
+      "status": "completed",
+      "delta_count": 7,
+      "duration_seconds": 0.145
+    },
+    {
+      "name": "function_roundtrip",
+      "passed": true,
+      "response_id": "resp_6694ff03b4574799afb1f9f013ad3998",
+      "item_id": "fc_51969508f2f74c979e9a81550859e4f4",
+      "call_id": "chatcmpl-tool-b80ce35951f18453",
+      "followup_id": "resp_6b23fff560d34e9eb077b33a40adcfa9",
+      "duration_seconds": 0.811
+    },
+    {
+      "name": "pydantic_parse",
+      "passed": true,
+      "response_id": "resp_e23b319df73a4176b8298e8cda682479",
+      "parsed": {
+        "city": "Paris"
+      },
+      "duration_seconds": 0.116
+    },
+    {
+      "name": "sdk_websocket_continuation",
+      "passed": true,
+      "first_response_id": "resp_2e210c7f31f7453f97287fd1e43a4526",
+      "continued_response_id": "resp_18f73b4db8e44fb187ff0de319aed5d1",
+      "duration_seconds": 0.958
+    }
+  ],
+  "passed": true
+}

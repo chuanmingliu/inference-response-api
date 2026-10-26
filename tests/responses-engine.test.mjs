@@ -376,3 +376,41 @@ test('a cutoff does not turn malformed emitted tool identity into a callable fun
     await assert.rejects(collect(adapter.generate(chosen)), { status: 502, code: 'invalid_upstream_response' });
   }
 });
+
+for (const runtime of ['vllm-metal', 'sglang-metal']) {
+  test(`${runtime} request-local preparation snapshots messages/tools once across tokenization and generation`, async () => {
+    const seen = [];
+    const adapter = createEngineAdapter({
+      upstream: 'http://engine.local/v1', profile: runtime,
+      fetchImpl: async (url, init) => {
+        seen.push({ path: url.pathname, body: JSON.parse(init.body), redirect: init.redirect });
+        return url.pathname.endsWith('chat/completions')
+          ? streamResponse(frame(choice({ tool_calls: [{ index: 0, id: 'call_a', function: { name: 'weather', arguments: '{}' } }] })) + finish('tool_calls'))
+          : Response.json({ count: 5 });
+      },
+    });
+    const input = request({ tools: [tool()], tool_choice: { type: 'function', name: 'weather' }, parallel_tool_calls: false });
+    const history = [user('earlier')];
+    const prepared = adapter.prepare(input, { history });
+    await prepared.countInputTokens();
+    // Mutation between the awaits must not invalidate the admitted snapshot.
+    history[0].content[0].text = 'changed history';
+    input.input[0].content[0].text = 'changed input';
+    input.tools[0].parameters.properties.injected = { type: 'string' };
+    Object.defineProperty(input, 'input', { get() { throw new Error('compiled twice'); } });
+    await collect(prepared.generate());
+    assert.deepEqual(seen[0].body.messages, seen[1].body.messages);
+    assert.deepEqual(seen[0].body.tools, seen[1].body.tools);
+    assert.equal(seen[1].body.messages[0].content, 'earlier');
+    assert.equal(seen[1].body.messages[1].content, 'Hi');
+    assert.equal(seen[1].body.parallel_tool_calls, false);
+    assert.ok(seen.every((entry) => entry.redirect === 'error'));
+    const fresh = adapter.prepare(request({ input: [user('fresh request')] }));
+    await fresh.countInputTokens();
+    assert.deepEqual(seen.at(-1).body.messages, [{ role: 'user', content: 'fresh request' }]);
+    const controller = new AbortController();
+    controller.abort(new Error('cancel prepared execution'));
+    await assert.rejects(collect(fresh.generate({ signal: controller.signal })), /cancel prepared/);
+    assert.equal(seen.length, 3, 'aborted prepared generation must not dispatch');
+  });
+}

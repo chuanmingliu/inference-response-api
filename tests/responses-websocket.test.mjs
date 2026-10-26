@@ -268,9 +268,17 @@ test('Connections rotate at configured lifetime and shutdown closes upgraded soc
   assert.equal(transport.wss.clients.size, 0);
 });
 
-test('Cached history is copied from service results and again before continuation validation', async (t) => {
+test('Cached history isolates service results and shares a deeply frozen snapshot on continuation', async (t) => {
   let retainedHistory;
   const service = fakeService();
+  const prepare = service.prepare;
+  service.prepare = (payload, context) => {
+    if (payload.previous_response_id) {
+      assert.ok(Object.isFrozen(context.history));
+      assert.throws(() => { context.history[0].content = 'mutated during prepare'; }, TypeError);
+    }
+    return prepare(payload, context);
+  };
   const run = service.run;
   service.run = async (...args) => {
     const result = await run(...args);

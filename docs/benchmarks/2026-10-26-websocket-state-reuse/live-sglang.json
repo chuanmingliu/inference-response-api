@@ -1,0 +1,146 @@
+{
+  "checked_at": "2026-10-26T02:54:13.550Z",
+  "base_url": "http://127.0.0.1:8090/",
+  "scope": "live service Core and transient WebSocket acceptance",
+  "hardware_attestation": "not_performed_by_this_script",
+  "pending_gates": [
+    "M05 engine kill/restart under load",
+    "M06 unified-memory pressure"
+  ],
+  "checks": [
+    {
+      "name": "service_configuration",
+      "status": "passed",
+      "duration_ms": 14,
+      "service_id": "sglang",
+      "model": "mlx-community/Qwen3-0.6B-4bit"
+    },
+    {
+      "name": "json_create_and_usage",
+      "status": "passed",
+      "duration_ms": 180,
+      "response_id": "resp_41954deda89448fe893e299f3490e14e",
+      "usage": {
+        "input_tokens": 19,
+        "output_tokens": 6,
+        "total_tokens": 25,
+        "input_tokens_details": {
+          "cached_tokens": 3
+        }
+      }
+    },
+    {
+      "name": "typed_items_and_all_roles",
+      "status": "passed",
+      "duration_ms": 53,
+      "response_id": "resp_abbb120a07ed4fb2838221f0359cb0f4"
+    },
+    {
+      "name": "sse_lifecycle_reconstruction",
+      "status": "passed",
+      "duration_ms": 51,
+      "event_count": 17,
+      "response_id": "resp_8b383005a19649df8427ce8dd6c5c59e"
+    },
+    {
+      "name": "http_abort_after_delta_then_independent_create",
+      "status": "passed",
+      "duration_ms": 63,
+      "interrupted_response_id": "resp_29af476d901e4122b3660b6e7b0e067f",
+      "followup_response_id": "resp_33ed65afe03e436db4dd7677d34cf97f",
+      "first_delta_ms": 23,
+      "client_abort_observed": true,
+      "abort_to_followup_completed_ms": 40,
+      "timing_scope": "Client-observed abort and successful followup; not engine cancellation latency."
+    },
+    {
+      "name": "function_call_and_manual_result_continuation",
+      "status": "passed",
+      "duration_ms": 201,
+      "call_id": "call_037de122e87c45caadb5977c",
+      "response_id": "resp_a4d49461a5e145ceb4261ea3723c4ba9",
+      "continuation_response_id": "resp_6c618d3140c444ce9522aabe1842fa77"
+    },
+    {
+      "name": "strict_function_rejects_adversarial_enum",
+      "status": "passed",
+      "duration_ms": 112,
+      "response_id": "resp_246cb5a0496843b2ab129577a1af51ef",
+      "call_id": "call_db2eec63a9d54cbc81b642d7",
+      "constrained_city": "Paris"
+    },
+    {
+      "name": "parallel_false_blocks_prompted_second_call",
+      "status": "passed",
+      "duration_ms": 101,
+      "response_id": "resp_4022eb5737ad41dfa9fb199db361fb8a",
+      "call_id": "call_b802b55b11684f0f88ec9158",
+      "function_call_count": 1
+    },
+    {
+      "name": "forced_function_excludes_other_declared_name",
+      "status": "passed",
+      "duration_ms": 181,
+      "response_id": "resp_bfd82b67ef9942288579085d30409713",
+      "call_id": "call_b6dabfe265ec4f49a8c055a2",
+      "selected_name": "lookup_weather"
+    },
+    {
+      "name": "strict_json_schema",
+      "status": "passed",
+      "duration_ms": 89,
+      "response_id": "resp_f16a748ba1db4b1d8002db8edce59541",
+      "usage": {
+        "input_tokens": 21,
+        "output_tokens": 16,
+        "total_tokens": 37,
+        "input_tokens_details": {
+          "cached_tokens": 3
+        }
+      }
+    },
+    {
+      "name": "output_limit_incomplete",
+      "status": "passed",
+      "duration_ms": 21,
+      "response_id": "resp_e9b6d2d66e2e428b8dc0515a809a03de"
+    },
+    {
+      "name": "unsupported_and_context_admission_errors",
+      "status": "passed",
+      "duration_ms": 9,
+      "cases": 4
+    },
+    {
+      "name": "websocket_two_turn_and_reconnect",
+      "status": "passed",
+      "duration_ms": 145,
+      "response_id": "resp_c58c6536f4434f56981d418b53a02582",
+      "continuation_response_id": "resp_8a4cb03a04f44acc84f822d31dc17686"
+    },
+    {
+      "name": "websocket_disconnect_during_generation_then_full_replay",
+      "status": "passed",
+      "duration_ms": 106,
+      "interrupted_response_id": "resp_c40b137e0ec94e089180dd713da70510",
+      "former_parent_response_id": "resp_480628af8fbf46fba69b2dd4e75b5ca3",
+      "replay_response_id": "resp_a40952beb84e485eb91c715d7ef04176",
+      "first_delta_ms": 27,
+      "client_disconnect_observed": true,
+      "disconnect_to_replay_completed_ms": 39,
+      "timing_scope": "Client-observed disconnection and successful full replay; not engine cancellation latency."
+    },
+    {
+      "name": "websocket_incremental_function_result",
+      "status": "passed",
+      "duration_ms": 170,
+      "response_id": "resp_09286aa1cea248e897f67ac4b3528729",
+      "continuation_response_id": "resp_97e0bd995e754fe3b30d85854205dbb4",
+      "call_id": "call_48e295a8aee5433da829c288"
+    }
+  ],
+  "model": "mlx-community/Qwen3-0.6B-4bit",
+  "runtime_profile": "sglang-metal",
+  "passed": true,
+  "completed_at": "2026-10-26T02:54:15.048Z"
+}
